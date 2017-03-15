@@ -10,8 +10,6 @@ const config = {
   };
   firebase.initializeApp(config);
 
-const dbRef = firebase.database().ref();
-
 class App extends React.Component {
 	constructor() {
 		super()
@@ -19,6 +17,7 @@ class App extends React.Component {
 			posts: []
 		}
 		this.addPost = this.addPost.bind(this);
+		this.displayPost = this.displayPost.bind(this);
 	}
 	componentDidMount() {
 		firebase.database().ref().on('value', (res) => {
@@ -27,18 +26,21 @@ class App extends React.Component {
 	}
 	addPost(e) {
 		e.preventDefault();
-		console.log('submitted');
 
 		const post = {
 			title: this.postTitle.value,
 			content: this.postContent.value
 		}
+		const dbRef = firebase.database().ref();
+		dbRef.push(post);
 
 		const newPosts = Array.from(this.state.posts);
 		newPosts.push(post);
 		this.setState({
 			posts: newPosts
 		})
+	}
+	displayPost() {
 
 	}
 	render() {
@@ -49,6 +51,10 @@ class App extends React.Component {
 					<input type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
 					<input type="submit" value="Create Post"/>
 				</form>
+				<section>
+					<div>Blog Title</div>
+					<div>Blog Content</div>
+				</section>
 			</div>
 		)
 	}

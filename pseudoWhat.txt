@@ -21,3 +21,14 @@
 	// display them back into page
 	// work on editing the page next
 	// to edit blog posts have, have it has a different view
+
+
+
+For user login 
+// Use conditional statement
+
+if (users logged in) {
+	render the code
+} else (users not logged in) {
+	run log in page
+}
