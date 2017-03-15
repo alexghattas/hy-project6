@@ -1,0 +1,23 @@
+// Build the back end client side first
+	// Connect to firebase
+	// Create inputs for each value of new blog post from clients side
+	// For each input, store that value into firebase
+		// Input for main blog content, is there a library for that?
+	// When done with inputs, create a shortcut on created blogs that will allow user to go in and edit the that blog
+	// If time, create login for client back end
+	// If time, use unsplash API to allow user to find hero image directly in create blog
+
+// To display the blogs, another virtual dom? Using React Router?
+	// Will take stored information form firebases array, and display a thumbnail per blog
+	// When clicked on thumbnail, will take you to page with blog details
+
+// Ajax call that array in the user end, display info
+// Take a look at the CMS Ryan showed
+
+// Talk with some
+	// start with create and edit 
+	// get inputs to work
+	// store them into firebase
+	// display them back into page
+	// work on editing the page next
+	// to edit blog posts have, have it has a different view
