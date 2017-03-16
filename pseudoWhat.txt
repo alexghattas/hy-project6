@@ -32,3 +32,14 @@ if (users logged in) {
 } else (users not logged in) {
 	run log in page
 }
+
+
+
+DO THIS NOW!!! March 16 - 4:32PM
+	// Add and delete posts
+	// Add react router
+		// route with dashboard to add and delete post
+		// route with displaying all the posts
+		// route for individual posts
+	// add authentication for dashboard
+	// leave editing posts to the end

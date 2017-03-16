@@ -10,6 +10,28 @@ const config = {
   };
   firebase.initializeApp(config);
 
+
+function Nav() {
+	return (
+		<header>
+			<nav>
+				Logo Goes Here
+			</nav>
+		</header>
+	)
+}
+
+function Post(props) {
+	return (
+		<div>
+			<i className="fa fa-trash" onClick={() => props.removePost(props.data.key)}></i>
+			<h1>{props.data.title}</h1>
+			<p>{props.data.content}</p>
+		</div>
+	)
+}
+
+
 class App extends React.Component {
 	constructor() {
 		super()
@@ -17,11 +39,19 @@ class App extends React.Component {
 			posts: []
 		}
 		this.addPost = this.addPost.bind(this);
-		this.displayPost = this.displayPost.bind(this);
+		this.removePost = this.removePost.bind(this);
 	}
 	componentDidMount() {
 		firebase.database().ref().on('value', (res) => {
-			console.log(res.val());
+			const userData = res.val();
+			const dataArray = [];
+			for(let objKey in userData) {
+				userData[objKey].key = objKey;
+				dataArray.push(userData[objKey])
+			}
+			this.setState({
+				posts: dataArray
+			})
 		});
 	}
 	addPost(e) {
@@ -32,29 +62,27 @@ class App extends React.Component {
 			content: this.postContent.value
 		}
 		const dbRef = firebase.database().ref();
+
 		dbRef.push(post);
-
-		const newPosts = Array.from(this.state.posts);
-		newPosts.push(post);
-		this.setState({
-			posts: newPosts
-		})
 	}
-	displayPost() {
-
+	removePost(post) {
+		const dbRef = firebase.database().ref(post );
+		dbRef.remove();
 	}
 	render() {
 		return (
 			<div>
+				<Nav />
 				<form onSubmit={this.addPost}>
 					<input type="text" name="post-title" placeholder='Blog Title' ref={ref => this.postTitle = ref}/>
 					<input type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
 					<input type="submit" value="Create Post"/>
 				</form>
-				<section>
-					<div>Blog Title</div>
-					<div>Blog Content</div>
-				</section>
+				<div>
+					{this.state.posts.map((item) => {
+						return <Post data={item} key={item.key} removePost={this.removePost}/>
+					})}
+				</div>
 			</div>
 		)
 	}
