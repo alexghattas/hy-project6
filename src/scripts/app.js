@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory, Link } from 'react-router';
 
 const config = {
     apiKey: "AIzaSyCmJQCkXSbER97FFay1iVSaaryybUxT06A",
@@ -23,11 +24,11 @@ function Nav() {
 
 function Post(props) {
 	return (
-		<div>
+		<li>
 			<i className="fa fa-trash" onClick={() => props.removePost(props.data.key)}></i>
 			<h1>{props.data.title}</h1>
 			<p>{props.data.content}</p>
-		</div>
+		</li>
 	)
 }
 
@@ -66,7 +67,7 @@ class App extends React.Component {
 		dbRef.push(post);
 	}
 	removePost(post) {
-		const dbRef = firebase.database().ref(post );
+		const dbRef = firebase.database().ref(post);
 		dbRef.remove();
 	}
 	render() {
@@ -78,14 +79,66 @@ class App extends React.Component {
 					<input type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
 					<input type="submit" value="Create Post"/>
 				</form>
-				<div>
+				<ul>
 					{this.state.posts.map((item) => {
 						return <Post data={item} key={item.key} removePost={this.removePost}/>
 					})}
-				</div>
+				</ul>
 			</div>
 		)
 	}
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))
+class Blog extends React.Component {
+	constructor() {
+			super()
+			this.state = {
+				posts: []
+			}
+		}
+		componentDidMount() {
+			firebase.database().ref().on('value', (res) => {
+				const userData = res.val();
+				const dataArray = [];
+				for(let objKey in userData) {
+					userData[objKey].key = objKey;
+					dataArray.push(userData[objKey])
+				}
+				this.setState({
+					posts: dataArray
+				})
+			});
+		}
+	render() {
+		return (
+			<div>
+			<ul>
+					{this.state.posts.map((item) => {
+						return <BlogPost data={item} key={item.key} removePost={this.removePost}/>
+					})}
+				</ul>
+			</div>
+		)
+	}
+}
+
+function BlogPost(props) {
+	return (
+		<div>
+			<h1>Welcome to my blog</h1>
+			<li>
+				<h1>{props.data.title}</h1>
+				<p>{props.data.content}</p>
+			</li>
+		</div>
+	)
+}
+
+
+
+ReactDOM.render(
+<Router history={browserHistory}>
+    <Route path="/" component={App} />
+    <Route path="/blog" component={Blog} />
+	{/*<Route path="/blog/:blog_id">*/}
+</Router>, document.getElementById('app'));

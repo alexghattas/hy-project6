@@ -6,6 +6,7 @@ const source = require('vinyl-source-stream');
 const sass = require('gulp-sass')
 const concat = require('gulp-concat')
 const buffer = require('vinyl-buffer');
+const historyApiFallback = require('connect-history-api-fallback');
 const browserSync = require('browser-sync');
 const reload = browserSync.reload;
 const notify = require('gulp-notify');
@@ -32,7 +33,8 @@ gulp.task('bs', () => {
     browserSync.init({
         server: {
             baseDir: './'
-        }
+        },
+        middleware: [historyApiFallback()]
     });
 });
 

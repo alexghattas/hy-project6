@@ -40,6 +40,12 @@ DO THIS NOW!!! March 16 - 4:32PM
 	// Add react router
 		// route with dashboard to add and delete post
 		// route with displaying all the posts
+			// Can you pass data from component to component? If I want to keep the pages separte..
 		// route for individual posts
 	// add authentication for dashboard
 	// leave editing posts to the end
+
+March 17 - 12:30PM
+	// Get blogs to display on main page, then individual page
+	// Make the blogs so they are editable
+	// Then add user authentication
