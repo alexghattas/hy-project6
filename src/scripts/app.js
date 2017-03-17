@@ -126,10 +126,11 @@ function BlogPost(props) {
 	return (
 		<div>
 			<h1>Welcome to my blog</h1>
-			<li>
-				<h1>{props.data.title}</h1>
-				<p>{props.data.content}</p>
-			</li>
+				<li>
+					<h1>{props.data.title}</h1>
+					<p>{props.data.content}</p>
+					<Link to={`/blog/${props.data.key}`}>View Post</Link>
+				</li>
 		</div>
 	)
 }
@@ -140,5 +141,5 @@ ReactDOM.render(
 <Router history={browserHistory}>
     <Route path="/" component={App} />
     <Route path="/blog" component={Blog} />
-	{/*<Route path="/blog/:blog_id">*/}
+	<Route path="/blog/:blog_id" />
 </Router>, document.getElementById('app'));
