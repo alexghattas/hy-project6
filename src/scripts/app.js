@@ -112,6 +112,7 @@ class Blog extends React.Component {
 	render() {
 		return (
 			<div>
+			<h1>Welcome to my blog</h1>
 			<ul>
 					{this.state.posts.map((item) => {
 						return <BlogPost data={item} key={item.key} removePost={this.removePost}/>
@@ -125,7 +126,6 @@ class Blog extends React.Component {
 function BlogPost(props) {
 	return (
 		<div>
-			<h1>Welcome to my blog</h1>
 				<li>
 					<h1>{props.data.title}</h1>
 					<p>{props.data.content}</p>
@@ -136,10 +136,21 @@ function BlogPost(props) {
 }
 
 
+class SinglePost extends React.Component {
+	componentDidMount() {
+		//connect fb with the blog_key 
+	}
+	render() {
+		return (
+			<h1>{this.props.params.blog_key}</h1>
+		)
+	}
+}
+
 
 ReactDOM.render(
 <Router history={browserHistory}>
     <Route path="/" component={App} />
     <Route path="/blog" component={Blog} />
-	<Route path="/blog/:blog_id" />
+	<Route path="/blog/:blog_key" component={SinglePost}/>
 </Router>, document.getElementById('app'));
