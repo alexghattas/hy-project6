@@ -51,6 +51,9 @@ class App extends React.Component {
 		}
 		this.addPost = this.addPost.bind(this);
 		this.removePost = this.removePost.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.signUp = this.signUp.bind(this);
+		this.logIn = this.logIn.bind(this);
 	}
 	componentDidMount() {
 		firebase.database().ref().on('value', (res) => {
@@ -64,6 +67,29 @@ class App extends React.Component {
 				posts: dataArray
 			})
 		});
+	}
+	handleChange(e){
+		this.setState({
+			[e.target.name]: e.target.value
+		})
+
+	}
+	signUp(e) {
+		e.preventDefault();
+		if(this.state.password === this.state.confirm) {
+			firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+			.then((userData) => {
+			})
+		}
+		document.getElementById('signUp').reset();
+	}
+	logIn(e) {
+		e.preventDefault();
+		firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+		.then((userData) => {
+		})
+		document.getElementById('logIn').reset();
+
 	}
 	addPost(e) {
 		e.preventDefault();
@@ -84,6 +110,17 @@ class App extends React.Component {
 		return (
 			<div>
 				<Nav />
+				<form onSubmit={this.signUp} id="signUp">
+					<input type="email" name="email" placeholder="Enter Your Email" onChange={this.handleChange}/>
+					<input type="password" name="password" placeholder="Create a Password" onChange={this.handleChange}/>
+					<input type="password" name="confirm" placeholder="Confirm Password" onChange={this.handleChange}/>
+					<button>Sign Up</button>
+				</form>
+				<form onSubmit={this.logIn} id="logIn">
+					<input type="email" name="email" onChange={this.handleChange} placeholder="Sign in with email"/>
+					<input type="password" name="password" onChange={this.handleChange} placeholder="Enter Password"/>
+					<button>Log In</button>
+				</form>
 				<form onSubmit={this.addPost}>
 					<input type="text" name="post-title" placeholder='Blog Title' ref={ref => this.postTitle = ref}/>
 					<input type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
