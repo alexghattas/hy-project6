@@ -22,10 +22,21 @@ function Nav() {
 	)
 }
 
+class Posted extends React.Component {
+	render() {
+		return (
+			<div>
+				stuff
+			</div>
+		)
+	}
+}
+
 function Post(props) {
 	return (
 		<li>
 			<i className="fa fa-trash" onClick={() => props.removePost(props.data.key)}></i>
+			<i className="fa fa-pencil" ></i>
 			<h1>{props.data.title}</h1>
 			<p>{props.data.content}</p>
 		</li>
@@ -137,12 +148,27 @@ function BlogPost(props) {
 
 
 class SinglePost extends React.Component {
-	componentDidMount() {
-		//connect fb with the blog_key 
-	}
+	constructor() {
+			super()
+			this.state = {
+				post: {}
+			}
+		}
+		componentDidMount() {
+			firebase.database().ref().on('value', (res) => {
+				const userPostKey = this.props.params.blog_key;
+				const userData = res.val();
+				this.setState({
+					post: userData[userPostKey]
+				})
+			});
+		}
 	render() {
 		return (
-			<h1>{this.props.params.blog_key}</h1>
+			<div>
+				<h1>{this.state.post.title}</h1>
+				<p>{this.state.post.content}</p>
+			</div>
 		)
 	}
 }

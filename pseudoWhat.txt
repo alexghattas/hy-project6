@@ -47,5 +47,6 @@ DO THIS NOW!!! March 16 - 4:32PM
 
 March 17 - 12:30PM
 	// Get blogs to display on main page, then individual page
+		// Turn off the component did mount
 	// Make the blogs so they are editable
 	// Then add user authentication
