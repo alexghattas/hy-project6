@@ -249,12 +249,15 @@ class SinglePost extends React.Component {
 	constructor() {
 			super()
 			this.state = {
+				loggedIn: false,
 				editing: false,
 				post: {}
 			};
 			this.save = this.save.bind(this);
 		}
-		componentDidMount() {
+	componentDidMount() {
+		firebase.auth().onAuthStateChanged((user) => {
+		if(user === null) {
 			firebase.database().ref().on('value', (res) => {
 				const userPostKey = this.props.params.blog_key;
 				const userData = res.val();
@@ -262,8 +265,15 @@ class SinglePost extends React.Component {
 					post: userData[userPostKey]
 				})
 				this.setState({})
-			});
+				});
+			}
+		else if(user) {
+			this.setState({
+				loggedIn: true
+			})
 		}
+		})
+	}
 	save(e) {
 		e.preventDefault();
 		
@@ -285,24 +295,32 @@ class SinglePost extends React.Component {
 				<p>{this.state.post.content}</p>
 			</div>
 		)
-
-		if (this.state.editing) {
+		if (this.state.loggedIn) {
 			editingTemp = (
-				<form onSubmit={this.save}>
-					<div>
-						<input type="text" defaultValue={this.state.post.title} name='title' ref={ref => this.postTitle = ref}/>
-					</div>
-					<div>
-						<input type="text" defaultValue={this.state.post.content} name='content' ref={ref => this.postContent = ref}/>
-					</div>
-					<input type="submit" value="Done Editing"/>
-				</form>
+				<div>
+					<i className="fa fa-pencil" onClick={() => this.setState({editing: true})}></i>
+					<h1>{this.state.post.title}</h1>
+					<p>{this.state.post.content}</p>
+				</div>
+			)
+		} 
+		if (this.state.editing && this.state.loggedIn) {
+			editingTemp = (
+				<div>
+					<form onSubmit={this.save}>
+						<div>
+							<input type="text" defaultValue={this.state.post.title} name='title' ref={ref => this.postTitle = ref}/>
+						</div>
+						<div>
+							<input type="text" defaultValue={this.state.post.content} name='content' ref={ref => this.postContent = ref}/>
+						</div>
+						<input type="submit" value="Done Editing"/>
+					</form>
+				</div>
 			)
 		}
-
 		return (
 			<div>
-				<i className="fa fa-pencil" onClick={() => this.setState({editing: true})}></i>
 				{editingTemp}
 			</div>
 		)
