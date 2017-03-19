@@ -32,7 +32,7 @@ function Post(props) {
 
 class App extends React.Component {
 	constructor() {
-		super()
+		super();
 		this.state = {
 			loggedIn: false,
 			posts: []
@@ -249,7 +249,7 @@ class SinglePost extends React.Component {
 	constructor() {
 			super()
 			this.state = {
-				loggedIn: false,
+				loggedInSinglePost: false,
 				editing: false,
 				post: {}
 			};
@@ -257,21 +257,20 @@ class SinglePost extends React.Component {
 		}
 	componentDidMount() {
 		firebase.auth().onAuthStateChanged((user) => {
-		if(user === null) {
+		if(user) {
+			this.setState({
+				loggedInSinglePost: true
+			})
+		}
+		if(user === null || user) {
 			firebase.database().ref().on('value', (res) => {
 				const userPostKey = this.props.params.blog_key;
 				const userData = res.val();
 				this.setState({
 					post: userData[userPostKey]
 				})
-				this.setState({})
 				});
 			}
-		else if(user) {
-			this.setState({
-				loggedIn: true
-			})
-		}
 		})
 	}
 	save(e) {
@@ -295,7 +294,7 @@ class SinglePost extends React.Component {
 				<p>{this.state.post.content}</p>
 			</div>
 		)
-		if (this.state.loggedIn) {
+		if (this.state.loggedInSinglePost) {
 			editingTemp = (
 				<div>
 					<i className="fa fa-pencil" onClick={() => this.setState({editing: true})}></i>
@@ -304,7 +303,7 @@ class SinglePost extends React.Component {
 				</div>
 			)
 		} 
-		if (this.state.editing && this.state.loggedIn) {
+		if (this.state.editing && this.state.loggedInSinglePost) {
 			editingTemp = (
 				<div>
 					<form onSubmit={this.save}>
