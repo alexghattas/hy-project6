@@ -34,6 +34,7 @@ class App extends React.Component {
 	constructor() {
 		super()
 		this.state = {
+			loggedIn: false,
 			posts: []
 		}
 		this.addPost = this.addPost.bind(this);
@@ -43,6 +44,7 @@ class App extends React.Component {
 		this.logIn = this.logIn.bind(this);
 		this.showCreatePost = this.showCreatePost.bind(this);
 		this.showCreateUser = this.showCreateUser.bind(this);
+		this.signOut = this.signOut.bind(this);
 	}
 	componentDidMount() {
 		firebase.auth().onAuthStateChanged((user) => {
@@ -55,18 +57,13 @@ class App extends React.Component {
 					dataArray.push(userData[objKey])
 				}
 				this.setState({
+					loggedIn: true,
 					posts: dataArray
 				})
 			});
 			}
 		})
 	}
-
-
-
-
-
-
 	handleChange(e){
 		this.setState({
 			[e.target.name]: e.target.value
@@ -97,7 +94,10 @@ class App extends React.Component {
 		.then((userData) => {
 		})
 		document.getElementById('logIn').reset();
-
+	}
+	signOut(e) {
+		firebase.auth().signOut();
+		window.location.reload();
 	}
 	addPost(e) {
 		e.preventDefault();
@@ -116,58 +116,69 @@ class App extends React.Component {
 		dbRef.remove();
 	}
 	render() {
-		return (
-			<div className="dashboardContainer">
-				<header>
-					<nav>
-						<div>
-							<h1>BLOGGY</h1>
+		let userStatus = (
+				<div>
+					<form onSubmit={this.logIn} id="logIn">
+						<input type="email" name="email" onChange={this.handleChange} placeholder="Sign in with email"/>
+						<input type="password" name="password" onChange={this.handleChange} placeholder="Enter Password"/>
+						<button>Log In</button>
+					</form>
+				</div>
+			)
+		if(this.state.loggedIn) {
+			userStatus = (
+					<div className="dashboardContainer">
+						<header>
+							<nav>
+								<div>
+									<h1>BLOGGY</h1>
+								</div>
+								<div className="mainNavigation__linksContainer">
+									<ul className="mainNavigation__links">
+										<li><button onClick={this.showCreateUser}>Create New User</button></li>
+										<li><button onClick={this.signOut}>Sign Out</button></li>
+									</ul>
+								</div>
+							</nav>
+							<section className="dashboard__title">
+								<div className="dashboard__title--left">
+									<h3>Your Created Posts</h3>
+								</div>
+								<div>
+									<button onClick={this.showCreatePost}>Create New Post</button>
+								</div>
+							</section>
+						</header>
+						<div className="dashboard__createUser" ref={ref => this.dashboard__createUser = ref}>
+							<form onSubmit={this.signUp} id="signUp">
+								<input type="email" name="email" placeholder="Enter Your Email" onChange={this.handleChange}/>
+								<input type="password" name="password" placeholder="Create a Password" onChange={this.handleChange}/>
+								<input type="password" name="confirm" placeholder="Confirm Password" onChange={this.handleChange}/>
+								<button>Create User</button>
+							</form>
+							<button onClick={this.showCreateUser}>Cancel</button>
 						</div>
-						<div className="mainNavigation__linksContainer">
-							<ul className="mainNavigation__links">
-								<li><a href="#">Log In</a></li>
+						<div className="dashboard__createPost" ref={ref => this.dashboard__createPost = ref}>
+							<form onSubmit={this.addPost}>
+								<input type="text" name="post-title" placeholder='Blog Title' ref={ref => this.postTitle = ref}/>
+								<input type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
+								<input type="submit" value="Create Post"/>
+							</form>
+							<button onClick={this.showCreatePost}>Discard Post</button>
+						</div>
+						<section>
+							<ul className="dashboard__singlePostContainer">
+								{this.state.posts.map((item) => {
+									return <Post data={item} key={item.key} removePost={this.removePost}/>
+								})}
 							</ul>
-						</div>
-					</nav>
-					<section className="dashboard__title">
-						<div className="dashboard__title--left">
-							<h3>Your Created Posts</h3>
-						</div>
-						<div>
-							<button onClick={this.showCreatePost}>Create New Post</button>
-							<button onClick={this.showCreateUser}>Create New User</button>
-						</div>
-					</section>
-				</header>
-				<div className="dashboard__createUser" ref={ref => this.dashboard__createUser = ref}>
-					<form onSubmit={this.signUp} id="signUp">
-						<input type="email" name="email" placeholder="Enter Your Email" onChange={this.handleChange}/>
-						<input type="password" name="password" placeholder="Create a Password" onChange={this.handleChange}/>
-						<input type="password" name="confirm" placeholder="Confirm Password" onChange={this.handleChange}/>
-						<button>Create User</button>
-					</form>
-					<button onClick={this.showCreateUser}>Cancel</button>
-				</div>
-				<form onSubmit={this.logIn} id="logIn">
-					<input type="email" name="email" onChange={this.handleChange} placeholder="Sign in with email"/>
-					<input type="password" name="password" onChange={this.handleChange} placeholder="Enter Password"/>
-					<button>Log In</button>
-				</form>
-				<div className="dashboard__createPost" ref={ref => this.dashboard__createPost = ref}>
-					<form onSubmit={this.addPost}>
-						<input type="text" name="post-title" placeholder='Blog Title' ref={ref => this.postTitle = ref}/>
-						<input type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
-						<input type="submit" value="Create Post"/>
-					</form>
-					<button onClick={this.showCreatePost}>Discard Post</button>
-				</div>
-				<section>
-					<ul className="dashboard__singlePostContainer">
-						{this.state.posts.map((item) => {
-							return <Post data={item} key={item.key} removePost={this.removePost}/>
-						})}
-					</ul>
-				</section>
+						</section>
+					</div>
+			)
+		}
+		return (
+			<div>
+				{userStatus}
 			</div>
 		)
 	}
