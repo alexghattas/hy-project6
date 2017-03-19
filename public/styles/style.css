@@ -1,2 +1,59 @@
 body {
   background: white; }
+
+nav {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  background: lightgrey; }
+
+.mainNavigation__linksContainer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center; }
+
+.mainNavigation__links {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: end;
+      justify-content: flex-end;
+  list-style: none;
+  -ms-flex-align: center;
+      align-items: center; }
+  .mainNavigation__links li {
+    padding: 0 5px; }
+
+.dashboardContainer {
+  height: 100vh; }
+
+.dashboard__createPost.show, .dashboard__createUser.show {
+  visibility: visible; }
+
+.dashboard__createPost, .dashboard__createUser {
+  visibility: hidden;
+  position: absolute;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.8);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0; }
+
+.dashboard__title {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between; }
+
+.dashboard__singlePost {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  list-style: none;
+  -ms-flex-pack: justify;
+      justify-content: space-between; }

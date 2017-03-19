@@ -12,35 +12,22 @@ const config = {
   firebase.initializeApp(config);
 
 
-function Nav() {
-	return (
-		<header>
-			<nav>
-				Logo Goes Here
-			</nav>
-		</header>
-	)
-}
-
-class Posted extends React.Component {
-	render() {
-		return (
-			<div>
-				stuff
-			</div>
-		)
-	}
-}
 
 function Post(props) {
 	return (
-		<li>
+		<li className="dashboard__singlePost">
 			<i className="fa fa-trash" onClick={() => props.removePost(props.data.key)}></i>
 			<h1>{props.data.title}</h1>
 			<p>{props.data.content}</p>
 		</li>
 	)
 }
+
+
+
+
+
+
 
 
 class App extends React.Component {
@@ -54,25 +41,45 @@ class App extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.signUp = this.signUp.bind(this);
 		this.logIn = this.logIn.bind(this);
+		this.showCreatePost = this.showCreatePost.bind(this);
+		this.showCreateUser = this.showCreateUser.bind(this);
 	}
 	componentDidMount() {
-		firebase.database().ref().on('value', (res) => {
-			const userData = res.val();
-			const dataArray = [];
-			for(let objKey in userData) {
-				userData[objKey].key = objKey;
-				dataArray.push(userData[objKey])
+		firebase.auth().onAuthStateChanged((user) => {
+		if(user) {
+			firebase.database().ref().on('value', (res) => {
+				const userData = res.val();
+				const dataArray = [];
+				for(let objKey in userData) {
+					userData[objKey].key = objKey;
+					dataArray.push(userData[objKey])
+				}
+				this.setState({
+					posts: dataArray
+				})
+			});
 			}
-			this.setState({
-				posts: dataArray
-			})
-		});
+		})
 	}
+
+
+
+
+
+
 	handleChange(e){
 		this.setState({
 			[e.target.name]: e.target.value
 		})
 
+	}
+	showCreatePost(e){
+		e.preventDefault();
+		this.dashboard__createPost.classList.toggle('show');
+	}
+	showCreateUser(e){
+		e.preventDefault();
+		this.dashboard__createUser.classList.toggle('show');
 	}
 	signUp(e) {
 		e.preventDefault();
@@ -82,6 +89,7 @@ class App extends React.Component {
 			})
 		}
 		document.getElementById('signUp').reset();
+		this.showCreateUser(e);
 	}
 	logIn(e) {
 		e.preventDefault();
@@ -101,6 +109,7 @@ class App extends React.Component {
 		const dbRef = firebase.database().ref();
 
 		dbRef.push(post);
+		this.showCreatePost(e)
 	}
 	removePost(post) {
 		const dbRef = firebase.database().ref(post);
@@ -108,33 +117,68 @@ class App extends React.Component {
 	}
 	render() {
 		return (
-			<div>
-				<Nav />
-				<form onSubmit={this.signUp} id="signUp">
-					<input type="email" name="email" placeholder="Enter Your Email" onChange={this.handleChange}/>
-					<input type="password" name="password" placeholder="Create a Password" onChange={this.handleChange}/>
-					<input type="password" name="confirm" placeholder="Confirm Password" onChange={this.handleChange}/>
-					<button>Sign Up</button>
-				</form>
+			<div className="dashboardContainer">
+				<header>
+					<nav>
+						<div>
+							<h1>BLOGGY</h1>
+						</div>
+						<div className="mainNavigation__linksContainer">
+							<ul className="mainNavigation__links">
+								<li><a href="#">Log In</a></li>
+							</ul>
+						</div>
+					</nav>
+					<section className="dashboard__title">
+						<div className="dashboard__title--left">
+							<h3>Your Created Posts</h3>
+						</div>
+						<div>
+							<button onClick={this.showCreatePost}>Create New Post</button>
+							<button onClick={this.showCreateUser}>Create New User</button>
+						</div>
+					</section>
+				</header>
+				<div className="dashboard__createUser" ref={ref => this.dashboard__createUser = ref}>
+					<form onSubmit={this.signUp} id="signUp">
+						<input type="email" name="email" placeholder="Enter Your Email" onChange={this.handleChange}/>
+						<input type="password" name="password" placeholder="Create a Password" onChange={this.handleChange}/>
+						<input type="password" name="confirm" placeholder="Confirm Password" onChange={this.handleChange}/>
+						<button>Create User</button>
+					</form>
+					<button onClick={this.showCreateUser}>Cancel</button>
+				</div>
 				<form onSubmit={this.logIn} id="logIn">
 					<input type="email" name="email" onChange={this.handleChange} placeholder="Sign in with email"/>
 					<input type="password" name="password" onChange={this.handleChange} placeholder="Enter Password"/>
 					<button>Log In</button>
 				</form>
-				<form onSubmit={this.addPost}>
-					<input type="text" name="post-title" placeholder='Blog Title' ref={ref => this.postTitle = ref}/>
-					<input type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
-					<input type="submit" value="Create Post"/>
-				</form>
-				<ul>
-					{this.state.posts.map((item) => {
-						return <Post data={item} key={item.key} removePost={this.removePost}/>
-					})}
-				</ul>
+				<div className="dashboard__createPost" ref={ref => this.dashboard__createPost = ref}>
+					<form onSubmit={this.addPost}>
+						<input type="text" name="post-title" placeholder='Blog Title' ref={ref => this.postTitle = ref}/>
+						<input type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
+						<input type="submit" value="Create Post"/>
+					</form>
+					<button onClick={this.showCreatePost}>Discard Post</button>
+				</div>
+				<section>
+					<ul className="dashboard__singlePostContainer">
+						{this.state.posts.map((item) => {
+							return <Post data={item} key={item.key} removePost={this.removePost}/>
+						})}
+					</ul>
+				</section>
 			</div>
 		)
 	}
 }
+
+
+
+
+
+
+
 
 class Blog extends React.Component {
 	constructor() {
@@ -181,6 +225,13 @@ function BlogPost(props) {
 		</div>
 	)
 }
+
+
+
+
+
+
+
 
 
 class SinglePost extends React.Component {
