@@ -49,8 +49,9 @@ gulp.task("styles", () => {
    .pipe(reload({stream: true}));
 });
 
-gulp.task('default', ['js','bs'], () => {
+gulp.task('default', ['js','bs', 'styles'], () => {
+   gulp.watch('./src/styles/**/*.scss', ['styles']);
    gulp.watch('src/**/*.js',['js']);
    gulp.watch('./public/style.css',reload);
-   gulp.watch('./src/styles/*.scss', ['styles']);
+   gulp.watch('./src/styles/**/*.scss',reload);
 });

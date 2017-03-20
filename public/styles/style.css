@@ -128,14 +128,20 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 * {
   box-sizing: border-box; }
 
-h1, h2, h3, h4, h5, h6, p, a {
-  font-family: "Work Sans", sans-serif; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Work Sans", sans-serif;
+  margin: 0; }
+
+p, a {
+  font-family: "Work Sans", sans-serif;
+  text-decoration: none; }
 
 body {
   background: white; }
 
 nav {
-  background: #1C77C3; }
+  background: #1C77C3;
+  padding: 12px 0; }
 
 .wrapper {
   max-width: 1170px;
@@ -151,7 +157,9 @@ nav {
   -ms-flex-align: center;
       align-items: center; }
   .dashboard__logoContainer .mainLogo {
-    max-width: 200px; }
+    max-width: 200px;
+    border: 1px solid white;
+    padding: 7px; }
 
 .dashboard__buttons {
   background: #1B1F3B;
@@ -164,11 +172,27 @@ nav {
   letter-spacing: 1px;
   margin-left: 10px; }
 
+.dashboard__buttonNav {
+  background: white;
+  padding: 5px 10px;
+  color: #1B1F3B;
+  border: none;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-right: 30px;
+  text-decoration: none; }
+
 .mainNavigation__linksContainer {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
       align-items: center; }
+  .mainNavigation__linksContainer p {
+    font-weight: 100;
+    color: white;
+    font-size: 16px; }
 
 .mainNavigation__links {
   display: -ms-flexbox;
@@ -186,6 +210,10 @@ nav {
 .dashboardContainer {
   height: 100vh; }
 
+.dashboard__title--left h3 {
+  font-weight: 300;
+  font-size: 30px; }
+
 .dashboard__createPost.show, .dashboard__createUser.show {
   visibility: visible; }
 
@@ -199,13 +227,17 @@ nav {
   right: 0;
   left: 0; }
 
+.dashboard__titleBackground {
+  background: #eeeeee; }
+
 .dashboard__title {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
       align-items: center;
   -ms-flex-pack: justify;
-      justify-content: space-between; }
+      justify-content: space-between;
+  padding: 20px 0; }
 
 .dashboard__singlePost {
   display: -ms-flexbox;
@@ -215,6 +247,9 @@ nav {
   list-style: none;
   -ms-flex-pack: justify;
       justify-content: space-between; }
+
+.dashboard__singlePost--image {
+  width: 100px; }
 
 .login__background {
   background: #1C77C3;
@@ -238,7 +273,9 @@ nav {
   .login__container h4 {
     color: white;
     font-weight: 100;
-    font-size: 24px; }
+    font-size: 24px;
+    padding: 25px 0;
+    line-height: 150%; }
 
 .login__container--logo {
   border: 1px solid white; }
@@ -291,3 +328,56 @@ nav {
 .logo_loginPage {
   width: 300px;
   text-align: center; }
+
+.blogPage__hero {
+  text-align: center;
+  height: 300px;
+  background: #eeeeee; }
+
+.blogPage__postContainer {
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  list-style: none;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+
+.blogPage__postContainer--list {
+  width: calc(33.3% - 20px);
+  background: #eeeeee;
+  padding: 20px;
+  margin: 30px 10px; }
+  .blogPage__postContainer--list h1 {
+    margin: 10px 0 20px 0; }
+
+.blogPage__singlePost--image {
+  max-width: 100%; }
+
+.blogPost__button {
+  background: #1B1F3B;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 100;
+  font-size: 14px;
+  letter-spacing: 1px; }
+
+.singlePost__hoverEdit {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  height: 60px;
+  background: #1B1F3B;
+  bottom: 0; }
+
+.singlePost__hoverEdit--button {
+  background: #1C77C3;
+  color: white;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 100;
+  border: none;
+  margin: 10px 0;
+  padding: 10px 20px; }

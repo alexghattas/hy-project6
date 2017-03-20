@@ -1,4 +1,6 @@
 import React from 'react';
+import { Router, Route, browserHistory, Link } from 'react-router';
+import BlogNav from './blognav.js';
 
 export default class Blog extends React.Component {
 	constructor() {
@@ -23,12 +25,18 @@ export default class Blog extends React.Component {
 	render() {
 		return (
 			<div>
-			<h1>Welcome to my blog</h1>
-			<ul>
-					{this.state.posts.map((item) => {
-						return <BlogPost data={item} key={item.key} removePost={this.removePost}/>
-					})}
-				</ul>
+				<BlogNav />
+				<section className="blogPage__hero">
+					<h1>Welcome to My Blog</h1>
+					<h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
+				</section>
+				<div className="wrapper">
+					<ul className="blogPage__postContainer">
+						{this.state.posts.map((item) => {
+							return <BlogPost data={item} key={item.key} removePost={this.removePost}/>
+						})}
+					</ul>
+				</div>
 			</div>
 		)
 	}
@@ -36,12 +44,10 @@ export default class Blog extends React.Component {
 
 function BlogPost(props) {
 	return (
-		<div>
-				<li>
-					<h1>{props.data.title}</h1>
-					<p>{props.data.content}</p>
-					<Link to={`/blog/${props.data.key}`}>View Post</Link>
-				</li>
-		</div>
+		<li className="blogPage__postContainer--list">
+			<img src={props.data.photo} className="blogPage__singlePost--image"/>
+			<h1>{props.data.title}</h1>
+			<Link className="blogPost__button" to={`/blog/${props.data.key}`}>View Post</Link>
+		</li>
 	)
 }

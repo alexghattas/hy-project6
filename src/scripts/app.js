@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, Link } from 'react-router';
+import Blog from './components/blog.js';
+import SinglePost from './components/singlepost.js';
 
 const config = {
     apiKey: "AIzaSyCmJQCkXSbER97FFay1iVSaaryybUxT06A",
@@ -19,15 +21,10 @@ function Post(props) {
 			<i className="fa fa-trash" onClick={() => props.removePost(props.data.key)}></i>
 			<h1>{props.data.title}</h1>
 			<p>{props.data.content}</p>
+			<img src={props.data.photo} className="dashboard__singlePost--image"/>
 		</li>
 	)
 }
-
-
-
-
-
-
 
 
 class App extends React.Component {
@@ -35,6 +32,7 @@ class App extends React.Component {
 		super();
 		this.state = {
 			loggedIn: false,
+			photo: '',
 			posts: []
 		}
 		this.addPost = this.addPost.bind(this);
@@ -45,6 +43,7 @@ class App extends React.Component {
 		this.showCreatePost = this.showCreatePost.bind(this);
 		this.showCreateUser = this.showCreateUser.bind(this);
 		this.signOut = this.signOut.bind(this);
+		this.uploadPhoto = this.uploadPhoto.bind(this);
 	}
 	componentDidMount() {
 		firebase.auth().onAuthStateChanged((user) => {
@@ -58,7 +57,7 @@ class App extends React.Component {
 				}
 				this.setState({
 					loggedIn: true,
-					posts: dataArray
+					posts: dataArray,
 				})
 			});
 			}
@@ -95,17 +94,37 @@ class App extends React.Component {
 	}
 	signOut(e) {
 		firebase.auth().signOut();
-		window.location.reload();
+		this.setState ({
+			loggedIn: false
+		})
 	}
 	addPost(e) {
 		e.preventDefault();
 		const post = {
 			title: this.postTitle.value,
-			content: this.postContent.value
+			content: this.postContent.value,
+			author: this.postAuthor.value,
+			data: this.postDate.value,
+			photo: this.state.photo
+
 		}
 		const dbRef = firebase.database().ref();
 		dbRef.push(post);
 		this.showCreatePost(e)
+		this.state.photo= ''
+	}
+	uploadPhoto(e) {
+		let file = e.target.files[0];
+		const storageRef = firebase.storage().ref('photos/' + file.name);
+		const task = storageRef.put(file).then(() => {
+			const urlObject = storageRef.getDownloadURL().then((data) => {
+				console.log('photo uploaded');
+				this.setState ({
+					photo: data
+				})
+			})
+		});
+
 	}
 	removePost(post) {
 		const dbRef = firebase.database().ref(post);
@@ -143,13 +162,16 @@ class App extends React.Component {
 									<div className="mainNavigation__linksContainer">
 										<ul className="mainNavigation__links">
 											<li>
-												<i onClick={this.signOut} className="fa fa-sign-out" aria-hidden="true"></i>
+												<Link to="/blog"className="dashboard__buttonNav">Go To Blog</Link>
+											</li>
+											<li>
+												<button onClick={this.signOut} className="dashboard__buttonNav">Sign Out</button>
 											</li>
 										</ul>
 									</div>
 								</div>
 							</nav>
-							<section>
+							<section className="dashboard__titleBackground">
 								<div className="wrapper dashboard__title">
 									<div className="dashboard__title--left">
 										<h3>Your Created Posts</h3>
@@ -174,6 +196,13 @@ class App extends React.Component {
 							<form onSubmit={this.addPost}>
 								<input type="text" name="post-title" placeholder='Blog Title' ref={ref => this.postTitle = ref}/>
 								<input type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
+								<select name="post-author" ref={ref => this.postAuthor = ref}>
+									<option value="Name">Name 1</option>
+									<option value="Name2">Names 2</option>
+									<option value="Name3">Name 3</option>
+								</select>
+								<input type="date" name="post-date" ref={ref => this.postDate = ref}/>
+								<input type="file" accept="image/*" onChange={this.uploadPhoto}/>
 								<input type="submit" value="Create Post"/>
 							</form>
 							<button onClick={this.showCreatePost}>Discard Post</button>
@@ -196,147 +225,6 @@ class App extends React.Component {
 	}
 }
 
-
-
-
-
-
-
-
-class Blog extends React.Component {
-	constructor() {
-			super()
-			this.state = {
-				posts: []
-			}
-		}
-		componentDidMount() {
-			firebase.database().ref().on('value', (res) => {
-				const userData = res.val();
-				const dataArray = [];
-				for(let objKey in userData) {
-					userData[objKey].key = objKey;
-					dataArray.push(userData[objKey])
-				}
-				this.setState({
-					posts: dataArray
-				})
-			});
-		}
-	render() {
-		return (
-			<div>
-			<h1>Welcome to my blog</h1>
-			<ul>
-					{this.state.posts.map((item) => {
-						return <BlogPost data={item} key={item.key} removePost={this.removePost}/>
-					})}
-				</ul>
-			</div>
-		)
-	}
-}
-
-function BlogPost(props) {
-	return (
-		<div>
-				<li>
-					<h1>{props.data.title}</h1>
-					<p>{props.data.content}</p>
-					<Link to={`/blog/${props.data.key}`}>View Post</Link>
-				</li>
-		</div>
-	)
-}
-
-
-
-
-
-
-
-
-
-class SinglePost extends React.Component {
-	constructor() {
-			super()
-			this.state = {
-				loggedInSinglePost: false,
-				editing: false,
-				post: {}
-			};
-			this.save = this.save.bind(this);
-		}
-	componentDidMount() {
-		firebase.auth().onAuthStateChanged((user) => {
-		if(user) {
-			this.setState({
-				loggedInSinglePost: true
-			})
-		}
-		if(user === null || user) {
-			firebase.database().ref().on('value', (res) => {
-				const userPostKey = this.props.params.blog_key;
-				const userData = res.val();
-				this.setState({
-					post: userData[userPostKey]
-				})
-				});
-			}
-		})
-	}
-	save(e) {
-		e.preventDefault();
-		
-		const dbRef = firebase.database().ref(this.props.params.blog_key)
-
-		dbRef.update({
-			title: this.postTitle.value,
-			content: this.postContent.value
-		})
-
-		this.setState({
-			editing: false
-		})
-	}
-	render() {
-		let editingTemp = (
-			<div>
-				<h1>{this.state.post.title}</h1>
-				<p>{this.state.post.content}</p>
-			</div>
-		)
-		if (this.state.loggedInSinglePost) {
-			editingTemp = (
-				<div>
-					<i className="fa fa-pencil" onClick={() => this.setState({editing: true})}></i>
-					<h1>{this.state.post.title}</h1>
-					<p>{this.state.post.content}</p>
-				</div>
-			)
-		} 
-		if (this.state.editing && this.state.loggedInSinglePost) {
-			editingTemp = (
-				<div>
-					<form onSubmit={this.save}>
-						<div>
-							<input type="text" defaultValue={this.state.post.title} name='title' ref={ref => this.postTitle = ref}/>
-						</div>
-						<div>
-							<input type="text" defaultValue={this.state.post.content} name='content' ref={ref => this.postContent = ref}/>
-						</div>
-						<input type="submit" value="Done Editing"/>
-					</form>
-				</div>
-			)
-		}
-		return (
-			<div>
-				{editingTemp}
-			</div>
-		)
-	}
-}
 
 
 ReactDOM.render(
