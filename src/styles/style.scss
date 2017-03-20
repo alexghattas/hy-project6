@@ -1,12 +1,43 @@
+@import "partials/_variables";
+@import "partials/_setup";
+@import "partials/_main";
+
+
 body {
 	background: white;
 }
 
 nav {
+	background: $primaryColorLight;
+}
+
+.wrapper {
+	max-width: 1170px;
+	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
-	background: lightgrey;
 }
+
+.dashboard__logoContainer {
+	display: flex;
+	align-items: center;
+	.mainLogo {
+		max-width: 200px;
+	}
+}
+
+.dashboard__buttons {
+	background: $primaryColorDark;
+	padding: 10px 20px;
+	color: white;
+	border: none;
+	font-family: $primaryFont;
+	font-weight: 100;
+	font-size: 14px;
+	letter-spacing: 1px;
+	margin-left: 10px;
+}
+
 .mainNavigation__linksContainer {
 	display: flex;
 	align-items: center;
@@ -16,9 +47,10 @@ nav {
 	justify-content: flex-end;
 	list-style: none;
 	align-items: center;
-	li {
-		padding: 0 5px;
-	}
+}
+.fa-sign-out {
+	font-size: 25px;
+	color: $primaryColorDark;
 }
 
 
@@ -50,17 +82,35 @@ nav {
 	justify-content: space-between;
 }
 
-.dashboard__title--left {
-
-}
-
-
-.dashboard__singlePostContainer {
-}
-
 .dashboard__singlePost {
 	display: flex;
 	align-items: center;
 	list-style: none;
 	justify-content: space-between;
 }
+
+
+.login__background {
+	background: $primaryColorLight;
+	height: 100vh;
+	width: 100vw;
+	margin: 0 auto;
+}
+
+.login__container {
+	display: flex;
+	justify-content: center;
+}
+
+.login__container--modal {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.logo_loginPage {
+	width: 200px;
+	text-align: center;
+}
+
+

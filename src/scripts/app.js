@@ -68,7 +68,6 @@ class App extends React.Component {
 		this.setState({
 			[e.target.name]: e.target.value
 		})
-
 	}
 	showCreatePost(e){
 		e.preventDefault();
@@ -101,13 +100,11 @@ class App extends React.Component {
 	}
 	addPost(e) {
 		e.preventDefault();
-
 		const post = {
 			title: this.postTitle.value,
 			content: this.postContent.value
 		}
 		const dbRef = firebase.database().ref();
-
 		dbRef.push(post);
 		this.showCreatePost(e)
 	}
@@ -117,41 +114,52 @@ class App extends React.Component {
 	}
 	render() {
 		let userStatus = (
-				<div>
-					<form onSubmit={this.logIn} id="logIn">
-						<input type="email" name="email" onChange={this.handleChange} placeholder="Sign in with email"/>
-						<input type="password" name="password" onChange={this.handleChange} placeholder="Enter Password"/>
-						<button>Log In</button>
-					</form>
-				</div>
+				<section className="login__background">
+					<div className="login__container">
+						<div className="login__container--modal">
+							<img src="../../assets/logo_darkblue.png" className="logo_loginPage"alt=""/>
+							<form onSubmit={this.logIn} id="logIn">
+								<input type="email" name="email" onChange={this.handleChange} placeholder="Sign in with email"/>
+								<input type="password" name="password" onChange={this.handleChange} placeholder="Enter Password"/>
+								<button>Log In</button>
+							</form>
+						</div>
+					</div>
+				</section>
 			)
 		if(this.state.loggedIn) {
 			userStatus = (
-					<div className="dashboardContainer">
+					<div>
 						<header>
 							<nav>
-								<div>
-									<h1>BLOGGY</h1>
-								</div>
-								<div className="mainNavigation__linksContainer">
-									<ul className="mainNavigation__links">
-										<li><button onClick={this.showCreateUser}>Create New User</button></li>
-										<li><button onClick={this.signOut}>Sign Out</button></li>
-									</ul>
+								<div className="wrapper">
+									<div className="dashboard__logoContainer">
+										<img className="mainLogo" src="../../assets/logo_white.png" alt="Blog Simply Logo in White"/>
+									</div>
+									<div className="mainNavigation__linksContainer">
+										<ul className="mainNavigation__links">
+											<li>
+												<i onClick={this.signOut} className="fa fa-sign-out" aria-hidden="true"></i>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</nav>
-							<section className="dashboard__title">
-								<div className="dashboard__title--left">
-									<h3>Your Created Posts</h3>
-								</div>
-								<div>
-									<button onClick={this.showCreatePost}>Create New Post</button>
+							<section>
+								<div className="wrapper dashboard__title">
+									<div className="dashboard__title--left">
+										<h3>Your Created Posts</h3>
+									</div>
+									<div>
+										<button onClick={this.showCreatePost} className="dashboard__buttons">Create New Post</button>
+										<button onClick={this.showCreateUser} className="dashboard__buttons">Create New User</button>
+									</div>
 								</div>
 							</section>
 						</header>
 						<div className="dashboard__createUser" ref={ref => this.dashboard__createUser = ref}>
 							<form onSubmit={this.signUp} id="signUp">
-								<input type="email" name="email" placeholder="Enter Your Email" onChange={this.handleChange}/>
+								<input type="email" name="email" placeholder="Enter Email" onChange={this.handleChange}/>
 								<input type="password" name="password" placeholder="Create a Password" onChange={this.handleChange}/>
 								<input type="password" name="confirm" placeholder="Confirm Password" onChange={this.handleChange}/>
 								<button>Create User</button>
