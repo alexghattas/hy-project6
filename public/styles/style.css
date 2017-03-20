@@ -128,6 +128,9 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 * {
   box-sizing: border-box; }
 
+h1, h2, h3, h4, h5, h6, p, a {
+  font-family: "Work Sans", sans-serif; }
+
 body {
   background: white; }
 
@@ -220,19 +223,71 @@ nav {
   margin: 0 auto; }
 
 .login__container {
+  text-align: center;
+  margin: 0 auto;
+  width: 600px;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
   -ms-flex-pack: center;
-      justify-content: center; }
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  padding-top: 65px; }
+  .login__container h4 {
+    color: white;
+    font-weight: 100;
+    font-size: 24px; }
+
+.login__container--logo {
+  border: 1px solid white; }
+  .login__container--logo img {
+    margin: 15px 15px 12px 15px; }
 
 .login__container--modal {
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
   -ms-flex-pack: center;
       justify-content: center;
-  -ms-flex-direction: column;
-      flex-direction: column; }
+  text-align: center;
+  width: 400px; }
+  .login__container--modal form {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    background: #1B1F3B;
+    padding: 50px; }
+    .login__container--modal form h5 {
+      margin-top: -20px;
+      margin-bottom: 20px;
+      color: white;
+      font-weight: 100;
+      font-size: 30px; }
+    .login__container--modal form a {
+      color: white;
+      font-weight: 100;
+      font-size: 14px;
+      margin-bottom: -20px;
+      margin-top: 20px; }
+    .login__container--modal form input {
+      margin: 8px 0;
+      font-family: "Work Sans", sans-serif;
+      color: #1B1F3B;
+      padding: 12px 15px;
+      text-align: center; }
+    .login__container--modal form button {
+      background: #1C77C3;
+      color: white;
+      font-family: "Work Sans", sans-serif;
+      padding: 10px 15px;
+      border: none;
+      font-weight: 100;
+      margin-top: 20px; }
 
 .logo_loginPage {
-  width: 200px;
+  width: 300px;
   text-align: center; }

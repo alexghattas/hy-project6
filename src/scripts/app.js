@@ -92,7 +92,6 @@ class App extends React.Component {
 		firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
 		.then((userData) => {
 		})
-		document.getElementById('logIn').reset();
 	}
 	signOut(e) {
 		firebase.auth().signOut();
@@ -116,12 +115,17 @@ class App extends React.Component {
 		let userStatus = (
 				<section className="login__background">
 					<div className="login__container">
+						<div className="login__container--logo">
+							<img src="../../assets/logo_white.png" className="logo_loginPage"alt=""/>
+						</div>
+						<h4>A simple platform to express your thoughts to the World Wide Web</h4>
 						<div className="login__container--modal">
-							<img src="../../assets/logo_darkblue.png" className="logo_loginPage"alt=""/>
 							<form onSubmit={this.logIn} id="logIn">
+								<h5>Sign In</h5>
 								<input type="email" name="email" onChange={this.handleChange} placeholder="Sign in with email"/>
 								<input type="password" name="password" onChange={this.handleChange} placeholder="Enter Password"/>
-								<button>Log In</button>
+								<button>Sign In</button>
+								<a>Forgot Password?</a>
 							</form>
 						</div>
 					</div>
