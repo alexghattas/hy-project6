@@ -60,6 +60,11 @@
 	left: 0;
 }
 
+// .dashboard__createUserForm.loading {
+// 	z-index: 999;
+// 	background: red;
+// }
+
 .dashboard__singlePost--list {
 	padding-left: 0;
 	li {
@@ -210,4 +215,14 @@
 .dashboard__singlePost--listTitles li:nth-of-type(4) {
 	width: 20%;
 	text-align: center;
+}
+
+.dashboard__viewEdit--button {
+	background: $primaryColorLight;
+	color: white;
+	font-family: $primaryFont;
+	padding: 10px 15px;
+	font-size: 12px;
+	border: none;
+	font-weight: 100;
 }

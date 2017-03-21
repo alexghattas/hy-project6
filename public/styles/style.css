@@ -329,6 +329,15 @@ p, a {
   width: 20%;
   text-align: center; }
 
+.dashboard__viewEdit--button {
+  background: #1C77C3;
+  color: white;
+  font-family: "Work Sans", sans-serif;
+  padding: 10px 15px;
+  font-size: 12px;
+  border: none;
+  font-weight: 100; }
+
 .blogPage__hero {
   display: -ms-flexbox;
   display: flex;

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, Link } from 'react-router';
 import Blog from './components/blog.js';
 import SinglePost from './components/singlepost.js';
+import SweetAlert from 'sweetalert-react';
 
 const config = {
     apiKey: "AIzaSyCmJQCkXSbER97FFay1iVSaaryybUxT06A",
@@ -29,8 +30,8 @@ function Post(props) {
 					<p>{props.data.date}</p>
 				</li>
 				<li>
-					<button className="" onClick={() => props.removePost(props.data.key)}>Delete</button>
-					<button>View/Edit</button>
+					<button onClick={() => props.removePost(props.data.key)}>Delete</button>
+					<Link className="dashboard__viewEdit--button" to={`/blog/${props.data.key}`}>View/Edit</Link>
 				</li>
 			</ul>
 		</li>
@@ -44,6 +45,7 @@ class App extends React.Component {
 		this.state = {
 			loggedIn: false,
 			photo: '',
+			show: '',
 			posts: []
 		}
 		this.addPost = this.addPost.bind(this);
@@ -100,6 +102,15 @@ class App extends React.Component {
 	logIn(e) {
 		e.preventDefault();
 		firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+		.catch((error) => {
+			console.log('error!!', error.code)
+			let alertMessage = ''
+			if(error.code === 'auth/user-not-found') {
+				this.setState ({
+					show: true
+				})
+			}
+		})
 		.then((userData) => {
 		})
 	}
@@ -125,13 +136,15 @@ class App extends React.Component {
 		this.state.photo= ''
 	}
 	uploadPhoto(e) {
+		console.log('photo upload begin')
 		let file = e.target.files[0];
 		const storageRef = firebase.storage().ref('photos/' + file.name);
 		const task = storageRef.put(file).then(() => {
 			const urlObject = storageRef.getDownloadURL().then((data) => {
-				console.log('photo uploaded');
+				console.log('photo upload DONE')
 				this.setState ({
-					photo: data
+					photo: data,
+					photoStatus: false
 				})
 			})
 		});
@@ -142,6 +155,14 @@ class App extends React.Component {
 		dbRef.remove();
 	}
 	render() {
+		let sweetAlertPop = (
+				<SweetAlert
+				        show={this.state.show}
+				        title="Oops!"
+				        text="Sorry! That email and password do not seem to match."
+				        onConfirm={() => this.setState({ show: false })}
+				 />
+			)
 		let userStatus = (
 				<section className="login__background">
 					<div className="login__container">
@@ -213,7 +234,7 @@ class App extends React.Component {
 						<div className="dashboard__createPost" ref={ref => this.dashboard__createPost = ref}>
 							<div className="dashboard__createPost--container">
 								<h2>Create a New Post</h2>
-								<form onSubmit={this.addPost}>
+								<form className="dashboard__createUserForm" onSubmit={this.addPost} ref={ref => this.dashboard__createUserForm = ref}>
 									<div className="dashboard__createPostInputs--firstLine">
 										<input type="text" placeholder="Type in Author"name="post-author" ref={ref => this.postAuthor = ref}/>
 										<input className="dashboard__createPost--dates" type="date" name="post-date" ref={ref => this.postDate = ref}/>
@@ -246,6 +267,7 @@ class App extends React.Component {
 		}
 		return (
 			<div>
+				{sweetAlertPop}
 				{userStatus}
 			</div>
 		)
