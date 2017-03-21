@@ -32,14 +32,13 @@ export default class SinglePost extends React.Component {
 	}
 	save(e) {
 		e.preventDefault();
-		
 		const dbRef = firebase.database().ref(this.props.params.blog_key)
-
 		dbRef.update({
 			title: this.postTitle.value,
-			content: this.postContent.value
+			content: this.postContent.value,
+			author: this.postAuthor.value,
+			date: this.postDate.value
 		})
-
 		this.setState({
 			editing: false
 		})
@@ -103,19 +102,23 @@ export default class SinglePost extends React.Component {
 		if (this.state.editing && this.state.loggedInSinglePost) {
 			editingTemp = (
 				<div>
-					<div>
-						<form onSubmit={this.save}>
-							<div>
+					<form onSubmit={this.save}>
+						<div className="wrapper__dashboard--list">
+							<div className="singlePost__editing--topRow">
+								<input type="text" defaultValue={this.state.post.author} name='author' ref={ref => this.postAuthor = ref}/>
+								<input type="date" defaultValue={this.state.post.date} name='date' ref={ref => this.postDate = ref}/>
+							</div>
+							<div className="singlePost__editing--title">
 								<input type="text" defaultValue={this.state.post.title} name='title' ref={ref => this.postTitle = ref}/>
 							</div>
-							<div>
-								<input type="text" defaultValue={this.state.post.content} name='content' ref={ref => this.postContent = ref}/>
+							<div className="singlePost__editing--content">
+								<textarea rows="7" type="text" defaultValue={this.state.post.content} name='content' ref={ref => this.postContent = ref}/>
 							</div>
-							<div className="singlePost__hoverEdit">
-								<input className="singlePost__hoverEdit--button" type="submit" value="Done Editing"/>
-							</div>
-						</form>
-					</div>
+						</div>
+						<div className="singlePost__hoverEdit">
+							<input className="singlePost__hoverEdit--button" type="submit" value="Done Editing"/>
+						</div>
+					</form>
 				</div>
 			)
 		}

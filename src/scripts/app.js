@@ -229,6 +229,12 @@ class App extends React.Component {
 
 
 						<section>
+							<ul className="dashboard__singlePost--listTitles wrapper__dashboard--list">
+								<li>Post Title</li>
+								<li>Author</li>
+								<li>Date</li>
+								<li>Actions</li>
+							</ul>
 							<ul className="dashboard__singlePost--list wrapper__dashboard--list">
 								{this.state.posts.map((item) => {
 									return <Post data={item} key={item.key} removePost={this.removePost}/>

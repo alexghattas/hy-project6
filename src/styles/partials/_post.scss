@@ -38,6 +38,7 @@
 
 .singlePost__mainContent {
 	padding: 50px 0;
+	width: 100%;
 }
 
 .singlePost__mainContent--info {
@@ -48,5 +49,27 @@
 	.fa {
 		color: $primaryColorDark;
 		padding: 0 20px;
+	}
+}
+
+.singlePost__editing--topRow {
+	display: flex;
+	input {
+		width: 50%;
+		background: #eeeeee;
+	}
+}
+
+.singlePost__editing--title {
+	input {
+		width: 100%;
+		background: #eeeeee;
+	}
+}
+
+.singlePost__editing--content {
+	textarea {
+		width: 100%;
+		background: #eeeeee;
 	}
 }

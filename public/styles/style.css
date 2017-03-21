@@ -198,6 +198,20 @@ p, a {
     list-style: none;
     text-decoration: none; }
 
+.dashboard__singlePost--listTitles {
+  padding-left: 0;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  padding: 20px 0; }
+  .dashboard__singlePost--listTitles li {
+    list-style: none;
+    text-decoration: none;
+    font-family: "Work Sans", sans-serif;
+    font-size: 20px;
+    color: #1C77C3;
+    font-weight: 400; }
+
 .dashboard__createPost--container {
   background: #1C77C3;
   margin: 50px 0;
@@ -242,20 +256,22 @@ p, a {
   list-style: none;
   text-decoration: none;
   padding-left: 0;
-  width: 100%; }
+  width: 100%;
+  border: 1px solid #1B1F3B;
+  margin: 8px 0; }
   .dashboard__singlePost button {
     margin-right: 10px;
     font-size: 12px; }
   .dashboard__singlePost h2 {
     font-weight: 300;
-    font-size: 24px; }
+    font-size: 20px; }
 
 .dashboard__singlePost li {
-  margin: 15px 5px;
-  text-align: left; }
+  margin: 10px 0px; }
 
 .dashboard__singlePost li:nth-of-type(1) {
-  width: 50%; }
+  width: 50%;
+  text-align: center; }
 
 .dashboard__singlePost li:nth-of-type(2) {
   width: 20%;
@@ -297,6 +313,21 @@ p, a {
 .dashboard__createPost--discardButton, .dashboard__createUser--discardButton {
   display: block;
   margin: 10px auto; }
+
+.dashboard__singlePost--listTitles li:nth-of-type(1) {
+  width: 50%; }
+
+.dashboard__singlePost--listTitles li:nth-of-type(2) {
+  width: 20%;
+  text-align: center; }
+
+.dashboard__singlePost--listTitles li:nth-of-type(3) {
+  width: 10%;
+  text-align: center; }
+
+.dashboard__singlePost--listTitles li:nth-of-type(4) {
+  width: 20%;
+  text-align: center; }
 
 .blogPage__hero {
   display: -ms-flexbox;
@@ -391,7 +422,8 @@ p, a {
     font-size: 50px; }
 
 .singlePost__mainContent {
-  padding: 50px 0; }
+  padding: 50px 0;
+  width: 100%; }
 
 .singlePost__mainContent--info {
   text-align: center;
@@ -401,6 +433,21 @@ p, a {
   .singlePost__mainContent--info .fa {
     color: #1B1F3B;
     padding: 0 20px; }
+
+.singlePost__editing--topRow {
+  display: -ms-flexbox;
+  display: flex; }
+  .singlePost__editing--topRow input {
+    width: 50%;
+    background: #eeeeee; }
+
+.singlePost__editing--title input {
+  width: 100%;
+  background: #eeeeee; }
+
+.singlePost__editing--content textarea {
+  width: 100%;
+  background: #eeeeee; }
 
 .login__background {
   background: #1C77C3;
@@ -520,8 +567,7 @@ select {
 
 .wrapper__dashboard--list {
   max-width: 1170px;
-  margin: 0 auto;
-  padding: 20px 0; }
+  margin: 0 auto; }
 
 .mainNavigation__linksContainer {
   display: -ms-flexbox;
