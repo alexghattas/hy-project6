@@ -48,14 +48,23 @@ export default class SinglePost extends React.Component {
 		let editingTemp = (
 			<div>
 				<div>
-					<section className="singlePost__blogHero" style={{background: 'url(' + this.state.post.photo + ')'}}>
+					<section className="singlePost__blogHero" style={{
+						backgroundImage: 'url(' + this.state.post.photo + ')',
+						backgroundSize: 'cover',
+						backgroundPosition: 'center center'
+					}}>
 						<div className="singlePost__blogHero--title">
 							<h1>{this.state.post.title}</h1>
 						</div>
+						<div className="singlePost__blogHero--title">
+							<h5>{this.state.post.author} on {this.state.post.date}</h5>
+						</div>
 					</section>
-					<p>{this.state.post.content}</p>
-					<p>{this.state.post.author}</p>
-					<p>{this.state.post.date}</p>
+					<div className="wrapper">
+						<p>{this.state.post.content}</p>
+						<p>{this.state.post.author}</p>
+						<p>{this.state.post.date}</p>
+					</div>
 				</div>
 			</div>
 		)
@@ -67,14 +76,26 @@ export default class SinglePost extends React.Component {
 						<Link to="/" className="singlePost__hoverEdit--button">Back to Dashboard</Link>
 					</div>
 					<div>
-						<section className="singlePost__blogHero" style={{background: 'url(' + this.state.post.photo + ')'}}>
+						<section className="singlePost__blogHero" style={{
+							backgroundImage: 'url(' + this.state.post.photo + ')',
+							backgroundSize: 'cover',
+							backgroundPosition: 'center center'
+						}}>
 							<div className="singlePost__blogHero--title">
 								<h1>{this.state.post.title}</h1>
 							</div>
 						</section>
-						<p>{this.state.post.content}</p>
-						<p>{this.state.post.author}</p>
-						<p>{this.state.post.date}</p>
+						<div className="wrapper">
+							<section className="singlePost__mainContent">
+								<div>
+									<h4 className="singlePost__mainContent--info">
+										<i className="fa fa-user" aria-hidden="true"></i>{this.state.post.author}
+										<i className="fa fa-calendar" aria-hidden="true"></i>{this.state.post.date}
+									</h4>
+								</div>
+								<p>{this.state.post.content}</p>
+							</section>
+						</div>
 					</div>
 				</div>
 			)
@@ -105,19 +126,4 @@ export default class SinglePost extends React.Component {
 			</div>
 		)
 	}
-}
-
-function PostHero() {
-	return (
-		<div>
-			<section className="singlePost__blogHero" style={{background: 'url(' + this.state.post.photo + ')'}}>
-				<div className="singlePost__blogHero--title">
-					<h1>{this.state.post.title}</h1>
-				</div>
-			</section>
-			<p>{this.state.post.content}</p>
-			<p>{this.state.post.author}</p>
-			<p>{this.state.post.date}</p>
-		</div>
-	)
 }

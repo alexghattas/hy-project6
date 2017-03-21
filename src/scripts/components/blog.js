@@ -45,7 +45,12 @@ export default class Blog extends React.Component {
 function BlogPost(props) {
 	return (
 		<li className="blogPage__postContainer--list">
-			<img src={props.data.photo} className="blogPage__singlePost--image"/>
+			<div className="blogPage__singlePost--image" style={{
+							backgroundImage: 'url(' + props.data.photo + ')',
+							backgroundSize: 'cover',
+							backgroundPosition: 'center center'
+						}}>
+			</div>
 			<h1>{props.data.title}</h1>
 			<Link className="blogPost__button" to={`/blog/${props.data.key}`}>View Post</Link>
 		</li>

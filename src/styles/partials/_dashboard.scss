@@ -1,0 +1,180 @@
+.dashboard__logoContainer {
+	display: flex;
+	align-items: center;
+	.mainLogo {
+		max-width: 200px;
+		border: 1px solid white;
+		padding: 7px;
+	}
+}
+
+.dashboard__buttons {
+	background: $primaryColorDark;
+	padding: 10px 20px;
+	color: white;
+	border: none;
+	font-family: $primaryFont;
+	font-weight: 100;
+	font-size: 14px;
+	letter-spacing: 1px;
+	margin-left: 10px;
+}
+
+.dashboard__buttonNav {
+	background: white;
+	padding: 5px 10px;
+	color: $primaryColorDark;
+	border: none;
+	font-family: $primaryFont;
+	font-weight: 300;
+	font-size: 12px;
+	letter-spacing: 1px;
+	text-decoration: none;
+}
+
+.dashboardContainer {
+	height: 100vh;
+}
+
+.dashboard__title--left {
+	h3 {
+		font-weight: 300;
+		font-size: 30px;
+	}
+}
+
+.dashboard__createPost.show, .dashboard__createUser.show {
+	visibility: visible;
+}
+
+.dashboard__createPost, .dashboard__createUser {
+	visibility: hidden;
+	position: absolute;
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.8);
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+
+.dashboard__singlePost--list {
+	padding-left: 0;
+	li {
+		list-style: none;
+		text-decoration: none;
+	}
+}
+
+.dashboard__createPost--container {
+	background: $primaryColorLight;
+	margin: 50px 0;
+	padding: 40px;
+	width: 80%;
+	h2 {
+		font-weight: 100;
+		font-size: 50px;
+		color: white;
+		text-align: center;
+		padding-bottom: 25px;
+	}
+}
+
+.dashboard__createUser--container {
+	background: $primaryColorLight;
+	margin: 100px 0;
+	padding: 40px;
+	width: 80%;
+	h2 {
+		font-weight: 100;
+		font-size: 50px;
+		color: white;
+		text-align: center;
+		padding-bottom: 25px;
+	}
+}
+
+
+.dashboard__titleBackground {
+	background: $lightGrey;
+}
+
+.dashboard__title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 0;
+}
+
+.dashboard__singlePost {
+	display: flex;
+	align-items: center;
+	list-style: none;
+	text-decoration: none;
+	padding-left: 0;
+	width: 100%;
+	button {
+		margin-right: 10px;
+		font-size: 12px;
+	}
+	h2 {
+		font-weight: 300;
+		font-size: 24px;
+	}}
+
+.dashboard__singlePost li {
+	margin: 15px 5px;
+	text-align: left;
+}
+.dashboard__singlePost li:nth-of-type(1) {
+	width: 50%;
+}
+.dashboard__singlePost li:nth-of-type(2) {
+	width: 20%;
+	text-align: center;
+}
+.dashboard__singlePost li:nth-of-type(3) {
+	width: 10%;
+	text-align: center;
+}
+.dashboard__singlePost li:nth-of-type(4) {
+	width: 20%;
+	text-align: center;
+}
+
+.dashboard__createPostInputs--firstLine {
+	width: 100%;
+	padding: 10px;
+	input {
+		width: calc(33.3% - 10px);
+		margin: 0 5px;
+	}
+}
+
+.dashboard__createPost--dates {
+	padding: 10px 14px;
+	border: none;
+}
+
+.dashboard__createPostInputs--title, .dashboard__createPostInputs--content, .dashboard__createUserInputs {
+	width: 100%;
+	margin: 5px 15px;
+	margin-bottom: 5px;
+}
+
+.dashboard__createPost--button, .dashboard__createUser--button {
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+	padding: 12px 40px;
+	margin-top: 20px;
+	background: white;
+	color: $primaryColorDark;
+}
+
+.dashboard__createPost--discardButton, .dashboard__createUser--discardButton {
+	display: block;
+	margin: 10px auto;
+}

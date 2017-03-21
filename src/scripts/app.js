@@ -194,14 +194,19 @@ class App extends React.Component {
 								</div>
 							</section>
 						</header>
+
+
 						<div className="dashboard__createUser" ref={ref => this.dashboard__createUser = ref}>
-							<form onSubmit={this.signUp} id="signUp">
-								<input type="email" name="email" placeholder="Enter Email" onChange={this.handleChange}/>
-								<input type="password" name="password" placeholder="Create a Password" onChange={this.handleChange}/>
-								<input type="password" name="confirm" placeholder="Confirm Password" onChange={this.handleChange}/>
-								<button>Create User</button>
-							</form>
-							<button onClick={this.showCreateUser}>Cancel</button>
+							<div className="dashboard__createUser--container">
+								<h2>Create a New User</h2>
+								<form onSubmit={this.signUp} id="signUp">
+									<input className="dashboard__createUserInputs" type="email" name="email" placeholder="Enter Email" onChange={this.handleChange}/>
+									<input className="dashboard__createUserInputs" type="password" name="password" placeholder="Create a Password" onChange={this.handleChange}/>
+									<input className="dashboard__createUserInputs" type="password" name="confirm" placeholder="Confirm Password" onChange={this.handleChange}/>
+									<button className="dashboard__createUser--button">Create User</button>
+								</form>
+								<button className="dashboard__createUser--discardButton" onClick={this.showCreateUser}>Cancel</button>
+							</div>
 						</div>
 
 
@@ -224,7 +229,7 @@ class App extends React.Component {
 
 
 						<section>
-							<ul className="dashboard__singlePost--list">
+							<ul className="dashboard__singlePost--list wrapper__dashboard--list">
 								{this.state.posts.map((item) => {
 									return <Post data={item} key={item.key} removePost={this.removePost}/>
 								})}

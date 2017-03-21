@@ -1,0 +1,82 @@
+.login__background {
+	background: $primaryColorLight;
+	height: 100vh;
+	width: 100vw;
+	margin: 0 auto;
+}
+
+.login__container {
+	text-align: center;
+	margin: 0 auto;
+	width: 600px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-top: 65px;
+	h4 {
+		color: white;
+		font-weight: 100;
+		font-size: 24px;
+		padding: 25px 0;
+		line-height: 150%;
+	}
+}
+
+.login__container--logo {
+	border: 1px solid white;
+	img {
+		margin: 15px 15px 12px 15px;
+	}
+}
+
+.login__container--modal {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	width: 400px;
+	form {
+		display: flex;
+		flex-direction: column;
+		background: $primaryColorDark;
+		padding: 50px;
+		h5 {
+			margin-top: -20px;
+			margin-bottom: 20px;
+			color: white;
+			font-weight: 100;
+			font-size: 30px;
+		}
+		a {
+			color: white;
+			font-weight: 100;
+			font-size: 14px;
+			margin-bottom: -20px;
+			margin-top: 20px;
+		}
+		input {
+			margin: 8px 0;
+			font-family: $primaryFont;
+			color: $primaryColorDark;
+			padding: 12px 15px;
+			text-align: center;
+		}
+		button {
+			background: $primaryColorLight;
+			color: white;
+			font-family: $primaryFont;
+			padding: 10px 15px;
+			border: none;
+			font-weight: 100;
+			margin-top: 20px;
+		}
+	}
+}
+
+
+.logo_loginPage {
+	width: 300px;
+	text-align: center;
+}
+
