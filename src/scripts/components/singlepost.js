@@ -48,11 +48,14 @@ export default class SinglePost extends React.Component {
 		let editingTemp = (
 			<div>
 				<div>
-					<img src={this.state.post.photo} alt=""/>
-					<h1>{this.state.post.title}</h1>
-					<p>{this.state.post.author}</p>
-					<p>{this.state.post.date}</p>
+					<section className="singlePost__blogHero" style={{background: 'url(' + this.state.post.photo + ')'}}>
+						<div className="singlePost__blogHero--title">
+							<h1>{this.state.post.title}</h1>
+						</div>
+					</section>
 					<p>{this.state.post.content}</p>
+					<p>{this.state.post.author}</p>
+					<p>{this.state.post.data}</p>
 				</div>
 			</div>
 		)
@@ -61,12 +64,17 @@ export default class SinglePost extends React.Component {
 				<div>
 					<div className="singlePost__hoverEdit">
 						<button className="singlePost__hoverEdit--button" onClick={() => this.setState({editing: true})}>Click to Edit Post</button>
+						<Link to="/" className="singlePost__hoverEdit--button">Back to Dashboard</Link>
 					</div>
 					<div>
-						<div>
-							<h1>{this.state.post.title}</h1>
-							<p>{this.state.post.content}</p>
-						</div>
+						<section className="singlePost__blogHero" style={{background: 'url(' + this.state.post.photo + ')'}}>
+							<div className="singlePost__blogHero--title">
+								<h1>{this.state.post.title}</h1>
+							</div>
+						</section>
+						<p>{this.state.post.content}</p>
+						<p>{this.state.post.author}</p>
+						<p>{this.state.post.data}</p>
 					</div>
 				</div>
 			)
@@ -97,4 +105,19 @@ export default class SinglePost extends React.Component {
 			</div>
 		)
 	}
+}
+
+function PostHero() {
+	return (
+		<div>
+			<section className="singlePost__blogHero" style={{background: 'url(' + this.state.post.photo + ')'}}>
+				<div className="singlePost__blogHero--title">
+					<h1>{this.state.post.title}</h1>
+				</div>
+			</section>
+			<p>{this.state.post.content}</p>
+			<p>{this.state.post.author}</p>
+			<p>{this.state.post.data}</p>
+		</div>
+	)
 }

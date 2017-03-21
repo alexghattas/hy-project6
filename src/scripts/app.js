@@ -192,21 +192,30 @@ class App extends React.Component {
 							</form>
 							<button onClick={this.showCreateUser}>Cancel</button>
 						</div>
+
+
 						<div className="dashboard__createPost" ref={ref => this.dashboard__createPost = ref}>
-							<form onSubmit={this.addPost}>
-								<input type="text" name="post-title" placeholder='Blog Title' ref={ref => this.postTitle = ref}/>
-								<input type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
-								<select name="post-author" ref={ref => this.postAuthor = ref}>
-									<option value="Name">Name 1</option>
-									<option value="Name2">Names 2</option>
-									<option value="Name3">Name 3</option>
-								</select>
-								<input type="date" name="post-date" ref={ref => this.postDate = ref}/>
-								<input type="file" accept="image/*" onChange={this.uploadPhoto}/>
-								<input type="submit" value="Create Post"/>
-							</form>
-							<button onClick={this.showCreatePost}>Discard Post</button>
+							<div className="dashboard__createPost--container">
+								<h2>Create a New Post</h2>
+								<form onSubmit={this.addPost}>
+									<div className="dashboard__createPostInputs--firstLine dashboard__inputs--global">
+										<select name="post-author" ref={ref => this.postAuthor = ref}>
+											<option value="Name">Name 1</option>
+											<option value="Name2">Names 2</option>
+											<option value="Name3">Name 3</option>
+										</select>
+										<input type="date" name="post-date" ref={ref => this.postDate = ref}/>
+										<input type="file" accept="image/*" onChange={this.uploadPhoto}/>
+									</div>
+									<input className="dashboard__createPostInputs--title" type="text" name="post-title" placeholder='Blog Title' ref={ref => this.postTitle = ref}/>
+									<input className="dashboard__createPostInputs--content" type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
+									<input type="submit" value="Create Post"/>
+								</form>
+								<button onClick={this.showCreatePost}>Discard Post</button>
+							</div>
 						</div>
+
+
 						<section>
 							<ul className="dashboard__singlePostContainer">
 								{this.state.posts.map((item) => {

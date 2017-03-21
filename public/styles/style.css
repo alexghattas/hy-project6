@@ -221,11 +221,21 @@ nav {
   visibility: hidden;
   position: absolute;
   z-index: 10;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
   background: rgba(0, 0, 0, 0.8);
   top: 0;
   bottom: 0;
   right: 0;
   left: 0; }
+
+.dashboard__createPost--container {
+  background: #1C77C3;
+  margin: 50px 0;
+  padding: 40px;
+  width: 80%; }
 
 .dashboard__titleBackground {
   background: #eeeeee; }
@@ -250,6 +260,34 @@ nav {
 
 .dashboard__singlePost--image {
   width: 100px; }
+
+.dashboard__createPostInputs--firstLine {
+  width: 100%; }
+  .dashboard__createPostInputs--firstLine input {
+    width: 33.3%; }
+  .dashboard__createPostInputs--firstLine select {
+    width: 33.3%; }
+
+.dashboard__inputs--global input {
+  margin: 8px 0;
+  font-family: "Work Sans", sans-serif;
+  color: #1B1F3B;
+  padding: 12px 15px; }
+
+.dashboard__inputs--global button {
+  background: #1C77C3;
+  color: white;
+  font-family: "Work Sans", sans-serif;
+  padding: 10px 15px;
+  border: none;
+  font-weight: 100;
+  margin-top: 20px; }
+
+.dashboard__createPostInputs--title {
+  width: 100%; }
+
+.dashboard__createPostInputs--content {
+  width: 100%; }
 
 .login__background {
   background: #1C77C3;
@@ -330,9 +368,25 @@ nav {
   text-align: center; }
 
 .blogPage__hero {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
   text-align: center;
   height: 300px;
-  background: #eeeeee; }
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../assets/main_blogImage.jpg");
+  background-size: cover;
+  background-position: center center; }
+  .blogPage__hero h1 {
+    color: white;
+    font-size: 50px;
+    margin-bottom: 20px; }
+  .blogPage__hero h4 {
+    color: white; }
 
 .blogPage__postContainer {
   display: -ms-flexbox;
@@ -379,5 +433,24 @@ nav {
   font-family: "Work Sans", sans-serif;
   font-weight: 100;
   border: none;
-  margin: 10px 0;
+  margin: 10px 5px;
   padding: 10px 20px; }
+
+.singlePost__blogHero {
+  height: 400px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center; }
+
+.singlePost__blogHero--title {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center; }
+  .singlePost__blogHero--title h1 {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    color: white;
+    font-size: 50px; }
