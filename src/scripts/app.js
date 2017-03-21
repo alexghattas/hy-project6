@@ -17,11 +17,22 @@ const config = {
 
 function Post(props) {
 	return (
-		<li className="dashboard__singlePost">
-			<i className="fa fa-trash" onClick={() => props.removePost(props.data.key)}></i>
-			<h1>{props.data.title}</h1>
-			<p>{props.data.content}</p>
-			<img src={props.data.photo} className="dashboard__singlePost--image"/>
+		<li>
+			<ul className="dashboard__singlePost">
+				<li>
+					<h2>{props.data.title}</h2>
+				</li>
+				<li>
+					<p>{props.data.author}</p>
+				</li>
+				<li>
+					<p>{props.data.date}</p>
+				</li>
+				<li>
+					<button className="" onClick={() => props.removePost(props.data.key)}>Delete</button>
+					<button>View/Edit</button>
+				</li>
+			</ul>
 		</li>
 	)
 }
@@ -104,7 +115,7 @@ class App extends React.Component {
 			title: this.postTitle.value,
 			content: this.postContent.value,
 			author: this.postAuthor.value,
-			data: this.postDate.value,
+			date: this.postDate.value,
 			photo: this.state.photo
 
 		}
@@ -198,26 +209,22 @@ class App extends React.Component {
 							<div className="dashboard__createPost--container">
 								<h2>Create a New Post</h2>
 								<form onSubmit={this.addPost}>
-									<div className="dashboard__createPostInputs--firstLine dashboard__inputs--global">
-										<select name="post-author" ref={ref => this.postAuthor = ref}>
-											<option value="Name">Name 1</option>
-											<option value="Name2">Names 2</option>
-											<option value="Name3">Name 3</option>
-										</select>
-										<input type="date" name="post-date" ref={ref => this.postDate = ref}/>
+									<div className="dashboard__createPostInputs--firstLine">
+										<input type="text" placeholder="Type in Author"name="post-author" ref={ref => this.postAuthor = ref}/>
+										<input className="dashboard__createPost--dates" type="date" name="post-date" ref={ref => this.postDate = ref}/>
 										<input type="file" accept="image/*" onChange={this.uploadPhoto}/>
 									</div>
 									<input className="dashboard__createPostInputs--title" type="text" name="post-title" placeholder='Blog Title' ref={ref => this.postTitle = ref}/>
-									<input className="dashboard__createPostInputs--content" type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
-									<input type="submit" value="Create Post"/>
+									<textarea rows="7" className="dashboard__createPostInputs--content" type="text" name="post-content" placeholder='Blog Content' ref={ref => this.postContent = ref}/>
+									<input className="dashboard__createPost--button" type="submit" value="Create Post"/>
 								</form>
-								<button onClick={this.showCreatePost}>Discard Post</button>
+								<button className="dashboard__createPost--discardButton" onClick={this.showCreatePost}>Discard Post</button>
 							</div>
 						</div>
 
 
 						<section>
-							<ul className="dashboard__singlePostContainer">
+							<ul className="dashboard__singlePost--list">
 								{this.state.posts.map((item) => {
 									return <Post data={item} key={item.key} removePost={this.removePost}/>
 								})}

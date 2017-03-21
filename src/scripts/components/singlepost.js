@@ -55,7 +55,7 @@ export default class SinglePost extends React.Component {
 					</section>
 					<p>{this.state.post.content}</p>
 					<p>{this.state.post.author}</p>
-					<p>{this.state.post.data}</p>
+					<p>{this.state.post.date}</p>
 				</div>
 			</div>
 		)
@@ -74,7 +74,7 @@ export default class SinglePost extends React.Component {
 						</section>
 						<p>{this.state.post.content}</p>
 						<p>{this.state.post.author}</p>
-						<p>{this.state.post.data}</p>
+						<p>{this.state.post.date}</p>
 					</div>
 				</div>
 			)
@@ -117,7 +117,7 @@ function PostHero() {
 			</section>
 			<p>{this.state.post.content}</p>
 			<p>{this.state.post.author}</p>
-			<p>{this.state.post.data}</p>
+			<p>{this.state.post.date}</p>
 		</div>
 	)
 }
