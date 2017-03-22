@@ -1,0 +1,40 @@
+// Media Queries
+$large: "(max-width: 992px)";
+$medium: "(max-width: 720px)";
+$small: "(max-width: 540px)";
+$extrasmall: "(max-width: 300px)";
+
+
+$primaryFont: 'Work Sans', sans-serif;
+
+$primaryColorDark: #1B1F3B;
+$primaryColorLight: #1C77C3;
+$lightGrey: #eeeeee;
+
+
+@mixin mq($size) {
+
+	@if ($size == 'xsmall') {
+		@media (max-width: 300px) { 
+			@content; 
+		}
+	}
+
+	@if ($size == 'small') {
+		@media (max-width: 540px) { 
+			@content; 
+		}
+	}
+
+	@if ($size == 'medium') {
+		@media (max-width: 720px) { 
+			@content; 
+		}
+	}
+ 
+	@if $size == 'large' {
+		@media (max-width: 992px) { 
+			@content; 
+		}
+	}
+}

@@ -549,11 +549,15 @@ p, a {
     .singlePost__blogHero--title {
       max-width: 100%; } }
   .singlePost__blogHero--title h1 {
-    text-align: center;
+    text-align: left;
     background: rgba(0, 0, 0, 0.8);
     padding: 20px 40px 20px 60px;
     color: white;
     font-size: 50px; }
+    @media (max-width: 720px) {
+      .singlePost__blogHero--title h1 {
+        text-align: center;
+        padding: 15px; } }
     @media (max-width: 540px) {
       .singlePost__blogHero--title h1 {
         font-size: 24px; } }

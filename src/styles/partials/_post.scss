@@ -34,11 +34,15 @@
 		max-width: 100%;
 	}
 	h1 {
-		text-align: center;
+		text-align: left;
 		background: rgba(0, 0, 0, 0.8);
 		padding: 20px 40px 20px 60px;
 		color: white;
 		font-size: 50px;
+		@include mq(medium) {
+			text-align: center;
+			padding:15px;
+		}
 		@include mq(small) {
 			font-size: 24px;
 		}

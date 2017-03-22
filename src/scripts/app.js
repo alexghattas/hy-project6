@@ -44,6 +44,8 @@ class App extends React.Component {
 		super();
 		this.state = {
 			loggedIn: false,
+			email: 'test@test.com',
+			password: 'password',
 			photo: '',
 			show: '',
 			photoAlert: '',
@@ -184,8 +186,8 @@ class App extends React.Component {
 						<div className="login__container--modal">
 							<form onSubmit={this.logIn} id="logIn">
 								<h5>Sign In</h5>
-								<input type="email" name="email" onChange={this.handleChange} placeholder="Sign in with email"/>
-								<input type="password" name="password" onChange={this.handleChange} placeholder="Enter Password"/>
+								<input type="email" name="email" onChange={this.handleChange} placeholder={this.state.email}/>
+								<input type="password" name="password" onChange={this.handleChange} placeholder={this.state.password}/>
 								<button>Sign In</button>
 								<a>Forgot Password?</a>
 							</form>
