@@ -47,17 +47,29 @@ select {
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
+	@include mq(large) {
+		margin: 0 15px;
+	}
+	@include mq(small) {
+		flex-direction: column;
+	}
 }
 
 .wrapper__dashboard--list {
 	max-width: 1170px;
 	margin: 0 auto;
+	@include mq(medium) {
+		padding: 0 10px;
+	}
 }
 
 
 .mainNavigation__linksContainer {
 	display: flex;
 	align-items: center;
+	@include mq(small) {
+		justify-content: center;
+	}
 	p {
 		font-weight: 100;
 		color: white;
@@ -69,6 +81,9 @@ select {
 	justify-content: flex-end;
 	list-style: none;
 	align-items: center;
+	@include mq(small) {
+		padding-left: 0;
+	}
 }
 
 .mainNavigation__links li:nth-of-type(1) {

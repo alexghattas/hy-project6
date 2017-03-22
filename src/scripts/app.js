@@ -46,6 +46,7 @@ class App extends React.Component {
 			loggedIn: false,
 			photo: '',
 			show: '',
+			photoAlert: '',
 			posts: []
 		}
 		this.addPost = this.addPost.bind(this);
@@ -137,6 +138,9 @@ class App extends React.Component {
 	}
 	uploadPhoto(e) {
 		console.log('photo upload begin')
+		this.setState ({
+			show: true
+		})
 		let file = e.target.files[0];
 		const storageRef = firebase.storage().ref('photos/' + file.name);
 		const task = storageRef.put(file).then(() => {
@@ -144,7 +148,6 @@ class App extends React.Component {
 				console.log('photo upload DONE')
 				this.setState ({
 					photo: data,
-					photoStatus: false
 				})
 			})
 		});
@@ -161,6 +164,14 @@ class App extends React.Component {
 				        title="Oops!"
 				        text="Sorry! That email and password do not seem to match."
 				        onConfirm={() => this.setState({ show: false })}
+				 />
+			)
+		let sweetAlertPopPhoto = (
+				<SweetAlert
+				        show={this.state.photoAlert}
+				        title="Photo Uploading"
+				        text="Sorry! That email and password do not seem to match."
+				        onConfirm={() => this.setState({ photoAlert: false })}
 				 />
 			)
 		let userStatus = (
@@ -182,7 +193,7 @@ class App extends React.Component {
 					</div>
 				</section>
 			)
-		if(this.state.loggedIn) {
+		if(firebase.auth().currentUser) {
 			userStatus = (
 					<div>
 						<header>

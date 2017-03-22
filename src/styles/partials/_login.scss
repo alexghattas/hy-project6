@@ -14,12 +14,24 @@
 	justify-content: center;
 	align-items: center;
 	padding-top: 65px;
+	@include mq(large) {
+		height: auto;
+		width: 100%;
+		padding: 0 40px;
+		padding-top: 40px;
+	}
+	@include mq(small) {
+		padding: 10px 10px 0 10px;
+	}
 	h4 {
 		color: white;
 		font-weight: 100;
 		font-size: 24px;
 		padding: 25px 0;
 		line-height: 150%;
+		@include mq(medium) {
+			font-size: 18px;
+		}
 	}
 }
 
@@ -36,17 +48,27 @@
 	justify-content: center;
 	text-align: center;
 	width: 400px;
+	@include mq(small) {
+		width: 100%;
+	}
 	form {
 		display: flex;
 		flex-direction: column;
 		background: $primaryColorDark;
 		padding: 50px;
+		@include mq(small) {
+			width: 100%;
+			padding: 15px;
+		}
 		h5 {
 			margin-top: -20px;
 			margin-bottom: 20px;
 			color: white;
 			font-weight: 100;
 			font-size: 30px;
+			@include mq(small) {
+				margin: 5px 0;
+			}
 		}
 		a {
 			color: white;
@@ -54,6 +76,9 @@
 			font-size: 14px;
 			margin-bottom: -20px;
 			margin-top: 20px;
+			@include mq(small) {
+				margin: 8px 0;
+			}
 		}
 		input {
 			margin: 8px 0;
@@ -61,6 +86,9 @@
 			color: $primaryColorDark;
 			padding: 12px 15px;
 			text-align: center;
+			@include mq(small) {
+				width: 100%;
+			}
 		}
 		button {
 			background: $primaryColorLight;
@@ -78,5 +106,8 @@
 .logo_loginPage {
 	width: 300px;
 	text-align: center;
+	@include mq(large) {
+		max-width: 90%
+	}
 }
 

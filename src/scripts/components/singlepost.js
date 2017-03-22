@@ -55,14 +55,17 @@ export default class SinglePost extends React.Component {
 						<div className="singlePost__blogHero--title">
 							<h1>{this.state.post.title}</h1>
 						</div>
-						<div className="singlePost__blogHero--title">
-							<h5>{this.state.post.author} on {this.state.post.date}</h5>
-						</div>
 					</section>
 					<div className="wrapper">
-						<p>{this.state.post.content}</p>
-						<p>{this.state.post.author}</p>
-						<p>{this.state.post.date}</p>
+						<section className="singlePost__mainContent">
+							<div>
+								<h4 className="singlePost__mainContent--info">
+									<i className="fa fa-user" aria-hidden="true"></i>{this.state.post.author}
+									<i className="fa fa-calendar" aria-hidden="true"></i>{this.state.post.date}
+								</h4>
+							</div>
+							<p>{this.state.post.content}</p>
+						</section>
 					</div>
 				</div>
 			</div>

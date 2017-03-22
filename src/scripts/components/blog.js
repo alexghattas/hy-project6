@@ -51,7 +51,7 @@ function BlogPost(props) {
 							backgroundPosition: 'center center'
 						}}>
 			</div>
-			<h1>{props.data.title}</h1>
+			<h2>{props.data.title}</h2>
 			<Link className="blogPost__button" to={`/blog/${props.data.key}`}>View Post</Link>
 		</li>
 	)

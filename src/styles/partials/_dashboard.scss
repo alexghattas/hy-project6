@@ -1,6 +1,9 @@
 .dashboard__logoContainer {
 	display: flex;
 	align-items: center;
+	@include mq(small) {
+		justify-content: center;
+	}
 	.mainLogo {
 		max-width: 200px;
 		border: 1px solid white;
@@ -18,6 +21,10 @@
 	font-size: 14px;
 	letter-spacing: 1px;
 	margin-left: 10px;
+	@include mq(medium) {
+		font-size: 12px;
+		padding: 10px 10px;
+	}
 }
 
 .dashboard__buttonNav {
@@ -38,8 +45,14 @@
 
 .dashboard__title--left {
 	h3 {
-		font-weight: 300;
+		font-weight: 500;
 		font-size: 30px;
+		@include mq(medium) {
+			font-size: 22px;
+		}
+		@include mq(small) {
+			display: none;
+		}
 	}
 }
 
@@ -60,16 +73,16 @@
 	left: 0;
 }
 
-// .dashboard__createUserForm.loading {
-// 	z-index: 999;
-// 	background: red;
-// }
-
 .dashboard__singlePost--list {
 	padding-left: 0;
 	li {
 		list-style: none;
 		text-decoration: none;
+		@include mq(large) {
+			button {
+				width: initial;
+			}
+		}
 	}
 }
 
@@ -78,6 +91,9 @@
 	display: flex;
 	text-align: center;
 	padding: 20px 0;
+	@include mq(small) {
+		display: none;
+	}
 	li {
 		list-style: none;
 		text-decoration: none;
@@ -85,6 +101,9 @@
 		font-size: 20px;
 		color: $primaryColorLight;
 		font-weight: 400;
+		p {
+			margin: 0;
+		}
 	}
 }
 
@@ -99,6 +118,9 @@
 		color: white;
 		text-align: center;
 		padding-bottom: 25px;
+		@include mq(medium) {
+			font-size: 24px;
+		}
 	}
 }
 
@@ -107,18 +129,29 @@
 	margin: 100px 0;
 	padding: 40px;
 	width: 80%;
+	@include mq(medium) {
+		padding: 15px;
+	}
+	@include mq(small) {
+		margin: 40px;
+		padding: 20px;
+	}
 	h2 {
 		font-weight: 100;
 		font-size: 50px;
 		color: white;
 		text-align: center;
 		padding-bottom: 25px;
+		@include mq(small) {
+			font-size: 24px;
+		}
 	}
 }
 
 
 .dashboard__titleBackground {
 	background: $lightGrey;
+	margin-bottom: 20px;
 }
 
 .dashboard__title {
@@ -126,6 +159,9 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 20px 0;
+	@include mq(small) {
+		flex-direction: column-reverse;
+	}
 }
 
 .dashboard__singlePost {
@@ -135,43 +171,87 @@
 	text-decoration: none;
 	padding-left: 0;
 	width: 100%;
-	border: 1px solid $primaryColorDark;
-	margin: 8px 0;
+	border: 1px solid #c7c7c7;
+	margin: 20px 0;
+	background: #f6f6f6;
+	@include mq(small) {
+		flex-direction: column;
+	}
 	button {
-		margin-right: 10px;
+		margin-bottom: 10px;
+		margin-top: 10px;
+		margin-right: 5px;
 		font-size: 12px;
+		@include mq(large) {
+			padding: 5px 15px;
+		}
 	}
 	h2 {
 		font-weight: 300;
 		font-size: 20px;
-	}}
+		@include mq(large) {
+			font-size: 18px;
+		}
+	}
+}
 
 .dashboard__singlePost li {
-	margin: 10px 0px;
+	margin: 6px 0px;
+}
+
+.dashboard__singlePost li a {
+	@include mq(large) {
+		width: 75%;
+	}
 }
 .dashboard__singlePost li:nth-of-type(1) {
 	width: 50%;
 	text-align: center;
+	@include mq(small) {
+		width: 100%;
+		padding: 5px 5px;
+	}
 }
 .dashboard__singlePost li:nth-of-type(2) {
 	width: 20%;
 	text-align: center;
+	@include mq(small) {
+		width: 100%;
+		padding: 5px 5px;
+	}
 }
 .dashboard__singlePost li:nth-of-type(3) {
 	width: 10%;
 	text-align: center;
+	@include mq(small) {
+		width: 100%;
+		padding: 5px 5px;
+	}
 }
 .dashboard__singlePost li:nth-of-type(4) {
 	width: 20%;
 	text-align: center;
+	@include mq(small) {
+		width: 100%;
+		padding: 5px 5px;
+	}
 }
 
 .dashboard__createPostInputs--firstLine {
 	width: 100%;
 	padding: 10px;
+	@include mq(medium) {
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+	}
 	input {
 		width: calc(33.3% - 10px);
 		margin: 0 5px;
+		@include mq(medium) {
+			width: 100%;
+			margin: 5px 0;
+		}
 	}
 }
 
@@ -184,6 +264,9 @@
 	width: 100%;
 	margin: 5px 15px;
 	margin-bottom: 5px;
+	@include mq(medium) {
+		margin: 5px 0;
+	}
 }
 
 .dashboard__createPost--button, .dashboard__createUser--button {
@@ -225,4 +308,7 @@
 	font-size: 12px;
 	border: none;
 	font-weight: 100;
+	@include mq(large) {
+		padding: 5px 15px;
+	}
 }
