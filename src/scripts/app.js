@@ -4,6 +4,14 @@ import { Router, Route, browserHistory, Link } from 'react-router';
 import Blog from './components/blog.js';
 import SinglePost from './components/singlepost.js';
 import SweetAlert from 'sweetalert-react';
+// import { createHistory, useBasename } from 'history';
+
+// const browserHistory = useBasename(createHistory)({
+// 	basename: '/hackeryou/project6'
+// });
+
+// Dont forget to delete browserHistory
+// Dont forget to add . to to script and stylesheet on index file
 
 const config = {
     apiKey: "AIzaSyCmJQCkXSbER97FFay1iVSaaryybUxT06A",
@@ -180,7 +188,7 @@ class App extends React.Component {
 				<section className="login__background">
 					<div className="login__container">
 						<div className="login__container--logo">
-							<img src="../../assets/logo_white.png" className="logo_loginPage"alt=""/>
+							<img src="./../../assets/logo_white.png" className="logo_loginPage"alt=""/>
 						</div>
 						<h4>A simple platform to express your thoughts to the World Wide Web</h4>
 						<div className="login__container--modal">
@@ -202,7 +210,7 @@ class App extends React.Component {
 							<nav>
 								<div className="wrapper">
 									<div className="dashboard__logoContainer">
-										<img className="mainLogo" src="../../assets/logo_white.png" alt="Blog Simply Logo in White"/>
+										<img className="mainLogo" src="./../../assets/logo_white.png" alt="Blog Simply Logo in White"/>
 									</div>
 									<div className="mainNavigation__linksContainer">
 										<ul className="mainNavigation__links">

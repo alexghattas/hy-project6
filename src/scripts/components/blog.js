@@ -23,20 +23,52 @@ export default class Blog extends React.Component {
 			});
 		}
 	render() {
+		
+		let userStatusBlog = (
+				<div>
+					<BlogNav />
+					<section className="blogPage__hero">
+						<h1>Welcome to My Blog</h1>
+						<h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
+					</section>
+					<div className="wrapper">
+						<ul className="blogPage__postContainer">
+							{this.state.posts.map((item) => {
+								return <BlogPost data={item} key={item.key} removePost={this.removePost}/>
+							})}
+						</ul>
+					</div>
+				</div>
+			)
+
+		if(firebase.auth().currentUser) {
+			userStatusBlog = (
+				<div>
+					<div className="singlePost__hoverEdit">
+						<div className="blog__hoverEdit--container">
+							<Link to="/" className="singlePost__hoverEdit--button">Back to Dashboard</Link>
+						</div>
+					</div>
+					<BlogNav />
+					<section className="blogPage__hero">
+						<h1>Welcome to My Blog</h1>
+						<h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
+					</section>
+					<div className="wrapper">
+						<ul className="blogPage__postContainer">
+							{this.state.posts.map((item) => {
+								return <BlogPost data={item} key={item.key} removePost={this.removePost}/>
+							})}
+						</ul>
+					</div>
+				</div>
+			)
+		}
+
+
 		return (
 			<div>
-				<BlogNav />
-				<section className="blogPage__hero">
-					<h1>Welcome to My Blog</h1>
-					<h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
-				</section>
-				<div className="wrapper">
-					<ul className="blogPage__postContainer">
-						{this.state.posts.map((item) => {
-							return <BlogPost data={item} key={item.key} removePost={this.removePost}/>
-						})}
-					</ul>
-				</div>
+				{userStatusBlog}
 			</div>
 		)
 	}

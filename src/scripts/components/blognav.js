@@ -8,9 +8,10 @@ export default function BlogNav() {
 				<div className="wrapper">
 					<div className="dashboard__logoContainer">
 						<img className="mainLogo" src="../../assets/logo_white.png" alt="Blog Simply Logo in White"/>
+						<p>A Simple Way to Blog</p>
 					</div>
 					<div className="mainNavigation__linksContainer">
-						<p>A Simple Way to Blog</p>
+						<Link to="/blog"className="dashboard__buttonNav">BLOG</Link>
 					</div>
 				</div>
 			</nav>

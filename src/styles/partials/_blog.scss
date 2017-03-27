@@ -40,9 +40,16 @@
 	}
 }
 
+.blog__hoverEdit--container {
+	padding: 30px 0;
+}
+
 .blogPage__postContainer--list {
 	width: calc(33.3% - 20px);
-	background: $lightGrey;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid #d3d3d3;
 	padding: 20px;
 	margin: 30px 10px;
 	@include mq(medium) {
@@ -53,9 +60,10 @@
 	}
 	h2 {
 		text-align: center;
-		margin: 10px 0 20px 0;
+		margin: 10px 0 10px 0;
 		color: $primaryColorDark;
 		font-size: 24px;
+		font-weight: 300;
 		@include mq(small) {
 			font-size: 16px;
 		}
@@ -68,7 +76,7 @@
 }
 
 .blogPost__button {
-	background: $primaryColorDark;
+	background: $primaryColorLight;
 	width: 100%;
 	display: block;
 	margin-top: 20px;

@@ -54,16 +54,13 @@ export default class SinglePost extends React.Component {
 					}}>
 						<div className="singlePost__blogHero--title">
 							<h1>{this.state.post.title}</h1>
+							<h4 className="singlePost__mainContent--info">
+								Written by <span>{this.state.post.author}</span> on <span>{this.state.post.date}</span>
+							</h4>
 						</div>
 					</section>
 					<div className="wrapper">
 						<section className="singlePost__mainContent">
-							<div>
-								<h4 className="singlePost__mainContent--info">
-									<i className="fa fa-user" aria-hidden="true"></i>{this.state.post.author}
-									<i className="fa fa-calendar" aria-hidden="true"></i>{this.state.post.date}
-								</h4>
-							</div>
 							<p>{this.state.post.content}</p>
 						</section>
 					</div>
@@ -74,8 +71,10 @@ export default class SinglePost extends React.Component {
 			editingTemp = (
 				<div>
 					<div className="singlePost__hoverEdit">
-						<button className="singlePost__hoverEdit--button" onClick={() => this.setState({editing: true})}>Click to Edit Post</button>
-						<Link to="/" className="singlePost__hoverEdit--button">Back to Dashboard</Link>
+						<div className="singlePost__hoverEdit--container">
+							<button className="singlePost__hoverEdit--button" onClick={() => this.setState({editing: true})}>Click to Edit Post</button>
+							<Link to="/" className="singlePost__hoverEdit--button">Back to Dashboard</Link>
+						</div>
 					</div>
 					<div>
 						<section className="singlePost__blogHero" style={{
@@ -85,16 +84,13 @@ export default class SinglePost extends React.Component {
 						}}>
 							<div className="singlePost__blogHero--title">
 								<h1>{this.state.post.title}</h1>
+								<h4 className="singlePost__mainContent--info">
+									Written by <span>{this.state.post.author}</span> on <span>{this.state.post.date}</span>
+								</h4>
 							</div>
 						</section>
 						<div className="wrapper">
 							<section className="singlePost__mainContent">
-								<div>
-									<h4 className="singlePost__mainContent--info">
-										<i className="fa fa-user" aria-hidden="true"></i>{this.state.post.author}
-										<i className="fa fa-calendar" aria-hidden="true"></i>{this.state.post.date}
-									</h4>
-								</div>
 								<p>{this.state.post.content}</p>
 							</section>
 						</div>
@@ -106,7 +102,8 @@ export default class SinglePost extends React.Component {
 			editingTemp = (
 				<div>
 					<form onSubmit={this.save}>
-						<div className="wrapper__dashboard--list">
+						<div className="wrapper__dashboard--list singlePost__editing--form">
+							<h4>Please make your changes, then click "Done Editing" at bottom</h4>
 							<div className="singlePost__editing--topRow">
 								<input type="text" defaultValue={this.state.post.author} name='author' ref={ref => this.postAuthor = ref}/>
 								<input type="date" defaultValue={this.state.post.date} name='date' ref={ref => this.postDate = ref}/>
@@ -115,11 +112,13 @@ export default class SinglePost extends React.Component {
 								<input type="text" defaultValue={this.state.post.title} name='title' ref={ref => this.postTitle = ref}/>
 							</div>
 							<div className="singlePost__editing--content">
-								<textarea rows="7" type="text" defaultValue={this.state.post.content} name='content' ref={ref => this.postContent = ref}/>
+								<textarea rows="15" type="text" defaultValue={this.state.post.content} name='content' ref={ref => this.postContent = ref}/>
 							</div>
 						</div>
 						<div className="singlePost__hoverEdit">
+							<div className="singlePost__hoverEdit--container">
 							<input className="singlePost__hoverEdit--button" type="submit" value="Done Editing"/>
+							</div>
 						</div>
 					</form>
 				</div>

@@ -9,6 +9,12 @@
 		border: 1px solid white;
 		padding: 7px;
 	}
+	p {
+		padding-left: 15px;
+		font-weight: 100;
+		color: white;
+		font-family: $primaryFont;
+	}
 }
 
 .dashboard__buttons {
@@ -29,12 +35,12 @@
 
 .dashboard__buttonNav {
 	background: white;
-	padding: 5px 10px;
+	padding: 10px 20px;
 	color: $primaryColorDark;
 	border: none;
 	font-family: $primaryFont;
 	font-weight: 300;
-	font-size: 12px;
+	font-size: 14px;
 	letter-spacing: 1px;
 	text-decoration: none;
 }
@@ -45,7 +51,7 @@
 
 .dashboard__title--left {
 	h3 {
-		font-weight: 500;
+		font-weight: 300;
 		font-size: 30px;
 		@include mq(medium) {
 			font-size: 22px;
@@ -63,14 +69,14 @@
 .dashboard__createPost, .dashboard__createUser {
 	visibility: hidden;
 	position: absolute;
-	z-index: 10;
-	display: flex;
-	justify-content: center;
-	background: rgba(0, 0, 0, 0.8);
 	top: 0;
 	bottom: 0;
 	right: 0;
 	left: 0;
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.8);
 }
 
 .dashboard__singlePost--list {
@@ -136,6 +142,13 @@
 		margin: 40px;
 		padding: 20px;
 	}
+	form {
+		width: 60%;
+		margin: 0 auto;
+		@include mq(medium) {
+			width: 100%;
+		}
+	}
 	h2 {
 		font-weight: 100;
 		font-size: 50px;
@@ -188,7 +201,9 @@
 	}
 	h2 {
 		font-weight: 300;
-		font-size: 20px;
+		font-size: 18px;
+		text-align: left;
+		padding-left: 20px;
 		@include mq(large) {
 			font-size: 18px;
 		}
